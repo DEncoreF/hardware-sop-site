@@ -1,0 +1,1237 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>硬體請採購及庫存作業流程</title>
+<meta name="description" content="開案、請購、採購、到貨、驗收、入庫、出庫申請與出庫八步驟的整合作業參考，含流程圖、欄位總表與角色分工。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&amp;family=Noto+Sans+TC:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A3E;
+    --ink-soft:#48576B;
+    --paper:#F6F3EA;
+    --surface:#FFFFFF;
+    --surface-alt:#EFEAD9;
+    --teal:#146F62;
+    --teal-strong:#0E5348;
+    --teal-tint:#DCEEE8;
+    --slate:#4F6C89;
+    --slate-tint:#E3EAF1;
+    --amber:#9C6B2E;
+    --amber-tint:#F3E5CB;
+    --warn:#B15A3C;
+    --warn-tint:#F5E2D8;
+    --role-hwpm:#6B5B95;
+    --role-hwpm-tint:#E7E2F0;
+    --role-wh:#2F7C93;
+    --role-wh-tint:#DCEBEE;
+    --role-proc:#5B7A3A;
+    --role-proc-tint:#E6EBDB;
+    --role-int:#A24E6E;
+    --role-int-tint:#F3E1E8;
+    --sc-stock:#1F5FA8;
+    --sc-sale:#C0392B;
+    --sc-borrow:#1E8449;
+    --sc-rent:#7D3C98;
+    --line:#DAD3C1;
+    --line-soft:#E8E2D2;
+    --muted:#79715F;
+    --emphasis-bg:#1B2A3E;
+    --emphasis-fg:#FFFFFF;
+    --success-bg:#0E5348;
+    --success-fg:#FFFFFF;
+    --shadow: 0 1px 2px rgba(27,42,62,0.06), 0 8px 24px -12px rgba(27,42,62,0.16);
+    --font-head: "Noto Serif TC", "Songti TC", serif;
+    --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    --font-mono: "IBM Plex Mono", "Noto Sans Mono TC", monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#ECE7DA;
+      --ink-soft:#B8AF9C;
+      --paper:#181511;
+      --surface:#221E17;
+      --surface-alt:#2A2419;
+      --teal:#4EBBA6;
+      --teal-strong:#6FD0BC;
+      --teal-tint:#1E3833;
+      --slate:#8FADCB;
+      --slate-tint:#233040;
+      --amber:#D6A65D;
+      --amber-tint:#3B2E17;
+      --warn:#DE8E6C;
+      --warn-tint:#3C2820;
+      --role-hwpm:#B8A8DB;
+      --role-hwpm-tint:#332B47;
+      --role-wh:#6FC2D6;
+      --role-wh-tint:#1E3338;
+      --role-proc:#A8CB80;
+      --role-proc-tint:#2C331E;
+      --role-int:#E29DBB;
+      --role-int-tint:#3A2530;
+      --sc-stock:#74AEF0;
+      --sc-sale:#F1948A;
+      --sc-borrow:#58D68D;
+      --sc-rent:#BB8FCE;
+      --line:#3A3327;
+      --line-soft:#2C271D;
+      --muted:#A79C87;
+      --emphasis-bg:#173A33;
+      --emphasis-fg:#F2EEE1;
+      --success-bg:#1F5A4E;
+      --success-fg:#F2EEE1;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#ECE7DA;
+    --ink-soft:#B8AF9C;
+    --paper:#181511;
+    --surface:#221E17;
+    --surface-alt:#2A2419;
+    --teal:#4EBBA6;
+    --teal-strong:#6FD0BC;
+    --teal-tint:#1E3833;
+    --slate:#8FADCB;
+    --slate-tint:#233040;
+    --amber:#D6A65D;
+    --amber-tint:#3B2E17;
+    --warn:#DE8E6C;
+    --warn-tint:#3C2820;
+    --role-hwpm:#B8A8DB;
+    --role-hwpm-tint:#332B47;
+    --role-wh:#6FC2D6;
+    --role-wh-tint:#1E3338;
+    --role-proc:#A8CB80;
+    --role-proc-tint:#2C331E;
+    --role-int:#E29DBB;
+    --role-int-tint:#3A2530;
+    --sc-stock:#74AEF0;
+    --sc-sale:#F1948A;
+    --sc-borrow:#58D68D;
+    --sc-rent:#BB8FCE;
+    --line:#3A3327;
+    --line-soft:#2C271D;
+    --muted:#A79C87;
+    --emphasis-bg:#173A33;
+    --emphasis-fg:#F2EEE1;
+    --success-bg:#1F5A4E;
+    --success-fg:#F2EEE1;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-body); text-wrap:balance; margin:0;}
+  p{margin:0;}
+  .wrap{max-width:1600px; margin:0 auto; padding:0 32px;}
+
+  /* ---- nav ---- */
+  .topnav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topnav-inner{
+    max-width:1600px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; gap:28px; height:52px;
+    overflow-x:auto;
+  }
+  .topnav-brand{
+    font-family:var(--font-mono); font-size:12px; font-weight:600;
+    color:var(--muted); letter-spacing:0.04em; white-space:nowrap;
+  }
+  .topnav a{
+    color:var(--ink-soft); text-decoration:none; font-size:13.5px; font-weight:500;
+    white-space:nowrap; padding:4px 0; border-bottom:2px solid transparent;
+  }
+  .topnav a:hover{color:var(--teal); border-bottom-color:var(--teal);}
+
+  /* ---- hero ---- */
+  .hero{padding:56px 0 40px;}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; font-weight:600; color:var(--teal);
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:14px;
+  }
+  .hero h1{font-size:clamp(30px,4vw,42px); font-weight:700; color:var(--ink); line-height:1.25;}
+  .hero-sub{
+    margin-top:14px; font-size:15.5px; color:var(--ink-soft); max-width:640px; line-height:1.7;
+  }
+  .hero-meta{
+    margin-top:22px; font-family:var(--font-mono); font-size:12px; color:var(--muted);
+  }
+  .flow-strip{
+    margin-top:32px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .flow-chip{
+    font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px;
+    background:var(--surface); border:1px solid var(--line); color:var(--ink-soft);
+  }
+  .flow-chip.is-final{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .flow-arrow{color:var(--muted); font-size:13px;}
+
+  /* ---- section shell ---- */
+  section{padding:52px 0; scroll-margin-top:68px;}
+  section + section{border-top:1px solid var(--line-soft);}
+  .section-head{margin-bottom:20px; max-width:760px;}
+  .section-kicker{
+    font-family:var(--font-mono); font-size:11.5px; font-weight:600; color:var(--teal);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;
+  }
+  .section-head h2{font-size:26px; font-weight:700; color:var(--ink);}
+  .section-desc{margin-top:10px; font-size:14px; color:var(--ink-soft); line-height:1.7;}
+
+  /* ---- role cards ---- */
+  .role-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  .role-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:20px 16px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px;
+  }
+  .role-badge{
+    width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    border:1.6px solid; background:var(--surface); flex:none;
+  }
+  .role-badge svg{display:block;}
+  .role-name{font-size:15px; font-weight:700; color:var(--ink);}
+  .role-sub{font-family:var(--font-mono); font-size:10.5px; font-weight:600; letter-spacing:0.03em;}
+  .role-desc{font-size:12px; color:var(--ink-soft); line-height:1.6; flex:1;}
+  .role-tag{
+    font-size:10.5px; font-weight:700; padding:6px 8px; border-radius:6px; line-height:1.5;
+  }
+  .role-note{font-size:10.5px; color:var(--muted); line-height:1.55;}
+
+  /* ---- role color legend / in-diagram role dots ---- */
+  .role-legend{
+    margin-top:14px; display:flex; flex-wrap:wrap; gap:8px 16px;
+    font-size:11.5px; color:var(--ink-soft);
+  }
+  .role-legend span{display:inline-flex; align-items:center; gap:5px;}
+  .role-legend i{width:8px; height:8px; border-radius:50%; display:inline-block; flex:none;}
+  .rdot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:1px; flex:none;}
+  .rdot-sales{background:var(--slate);}
+  .rdot-aiopm{background:var(--teal);}
+  .rdot-hwpm{background:var(--role-hwpm);}
+  .rdot-projpm{background:var(--amber);}
+  .rdot-wh{background:var(--role-wh);}
+  .rdot-ga{background:var(--warn);}
+  .rdot-proc{background:var(--role-proc);}
+  .rdot-int{background:var(--role-int);}
+  .rdot-neutral{background:var(--muted);}
+
+  /* ---- flowchart figure ---- */
+  figure.diagram{margin:0;}
+  .diagram-frame{
+    overflow-x:auto; background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; box-shadow:var(--shadow); padding:8px;
+  }
+  .diagram-frame svg{display:block; width:100%; height:auto; min-width:900px;}
+  figcaption{margin-top:14px; font-size:12.5px; color:var(--muted); line-height:1.6;}
+
+  svg .lane{fill:none;}
+  svg .lane-main{fill:var(--teal-tint); opacity:0.55;}
+  svg .lane-bg{fill:var(--slate-tint); opacity:0.55;}
+  svg .lane-amber{fill:var(--amber-tint); opacity:0.5;}
+  svg .lane-neutral{fill:var(--surface-alt); opacity:0.85; stroke:var(--line); stroke-width:1.4; stroke-dasharray:7 5;}
+  svg .lane-label{font-family:var(--font-body); font-size:13px; font-weight:700;}
+  svg .lane-label-main{fill:var(--teal-strong);}
+  svg .lane-label-bg{fill:var(--slate);}
+
+  svg .node{stroke-width:1.4;}
+  svg .node-plain{fill:var(--surface); stroke:var(--line);}
+  svg .node-core{fill:var(--emphasis-bg); stroke:var(--emphasis-bg);}
+  svg .node-end{fill:var(--success-bg); stroke:var(--success-bg);}
+  svg .node-warn{fill:var(--warn-tint); stroke:var(--warn);}
+  svg .node-input{fill:var(--surface); stroke:var(--slate); stroke-dasharray:4 3;}
+  svg .node-decision{fill:var(--teal-tint); stroke:var(--teal);}
+  svg .node-decision-amber{fill:var(--amber-tint); stroke:var(--amber);}
+  svg .node-terminal{fill:var(--surface); stroke:var(--muted); stroke-dasharray:4 3;}
+
+  svg .node-label{font-family:var(--font-body); fill:var(--ink);}
+  svg rect.node-core + text.node-label{fill:var(--emphasis-fg);}
+  svg rect.node-end + text.node-label{fill:var(--success-fg);}
+  svg .diamond-label{fill:var(--teal-strong);}
+
+  svg .flow-line{stroke:var(--ink-soft); stroke-width:1.5; fill:none;}
+  svg .flow-line-warn{stroke:var(--warn); stroke-width:1.6;}
+  svg .flow-line-yes-curve{stroke:var(--teal); stroke-width:1.6;}
+  svg .loop-back{stroke:var(--slate); stroke-width:1.6;}
+  svg .exc-line{stroke:var(--warn); stroke-width:1.5; fill:none; stroke-dasharray:5 3;}
+  svg .info-line{stroke:var(--teal); stroke-width:1.5; fill:none; stroke-dasharray:5 3;}
+  svg .sc-stock{stroke:var(--sc-stock); stroke-width:1.7; fill:none;}
+  svg .sc-sale{stroke:var(--sc-sale); stroke-width:1.7; fill:none;}
+  svg .sc-borrow{stroke:var(--sc-borrow); stroke-width:1.7; fill:none;}
+  svg .sc-rent{stroke:var(--sc-rent); stroke-width:1.7; fill:none;}
+  svg .connector{fill:var(--surface); stroke-width:1.6;}
+  .line-legend{margin-top:8px; display:flex; flex-wrap:wrap; gap:6px 16px; font-size:11.5px; color:var(--ink-soft);}
+  .line-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .line-legend i{width:22px; height:0; border-top:2px solid var(--ink-soft); display:inline-block; flex:none;}
+
+  svg .flow-label{font-family:var(--font-body); font-weight:600; fill:var(--ink-soft);}
+  svg .flow-label-yes{fill:var(--teal-strong);}
+  svg .flow-label-no{fill:var(--warn);}
+  svg .flow-label-warn-curve{fill:var(--warn);}
+  svg .flow-label-yes-curve{fill:var(--teal-strong);}
+  svg .flow-label-muted{fill:var(--muted); font-weight:500;}
+
+  foreignObject{overflow:visible;}
+  .svg-edit{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; line-height:1.3;
+    font-family:var(--font-body); color:var(--ink);
+  }
+  .svg-edit.left{justify-content:flex-start; text-align:left;}
+  .svg-edit.on-core{color:var(--emphasis-fg);}
+  .svg-edit.on-end{color:var(--success-fg);}
+  .svg-edit.diamond{color:var(--teal-strong); font-weight:700;}
+  .svg-edit.diamond-amber{color:var(--amber); font-weight:700;}
+  .svg-edit.lane-bg{color:var(--slate); font-weight:700;}
+  .svg-edit.lane-main{color:var(--teal-strong); font-weight:700;}
+  .svg-edit.lane-amber-text{color:var(--amber); font-weight:700;}
+  .svg-edit.lane-neutral-text{color:var(--muted); font-weight:700;}
+  .svg-edit.muted{color:var(--muted); font-weight:500;}
+  .svg-edit.terminal{color:var(--muted); font-weight:600;}
+  .svg-edit.yes{color:var(--teal-strong); font-weight:600;}
+  .svg-edit.no{color:var(--warn); font-weight:600;}
+  .svg-edit.warn-curve{color:var(--warn); font-weight:600;}
+  .svg-edit.yes-curve{color:var(--teal-strong); font-weight:600;}
+
+  /* ---- 銷售專案三條路徑 ---- */
+  .path-list{display:flex; flex-direction:column; gap:12px;}
+  .path-row{
+    display:grid; grid-template-columns:230px 1fr; gap:0;
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .path-cond{padding:16px 18px; display:flex; flex-direction:column; gap:6px; border-right:1px solid var(--line-soft);}
+  .path-no{
+    width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-weight:700; font-size:12.5px; color:var(--paper); flex:none;
+  }
+  .path-cond-top{display:flex; align-items:center; gap:10px;}
+  .path-title{font-size:15px; font-weight:700; color:var(--ink);}
+  .path-when{font-size:11.5px; color:var(--muted); line-height:1.55;}
+  .path-body{padding:14px 18px; display:flex; flex-direction:column; gap:10px; justify-content:center;}
+  .path-steps{display:flex; flex-wrap:wrap; align-items:center; gap:6px 4px;}
+  .step{
+    display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:var(--ink);
+    background:var(--surface-alt); border:1px solid var(--line); border-radius:7px; padding:6px 10px; line-height:1.35;
+  }
+  .step.is-pm{background:var(--amber-tint); border-color:var(--amber); color:var(--ink);}
+  .step.is-end{background:var(--success-bg); border-color:var(--success-bg); color:var(--success-fg);}
+  .step.is-muted{background:transparent; border-style:dashed; color:var(--muted); font-weight:500;}
+  .step-arrow{color:var(--muted); font-size:12px; padding:0 2px;}
+  .path-pm{font-size:12px; color:var(--ink-soft); line-height:1.6;}
+  .path-pm b{color:var(--amber);}
+  .path-pm .no{color:var(--warn); font-weight:700;}
+  .path-pm .yes{color:var(--teal-strong); font-weight:700;}
+  .path-summary{margin-top:16px;}
+  table.path-table{width:100%; min-width:520px; border-collapse:collapse; background:var(--surface);}
+  .path-table th{background:var(--surface-alt); color:var(--ink); font-size:11.5px; font-weight:700; text-align:left; padding:10px 14px;}
+  .path-table td{padding:10px 14px; font-size:12.5px; color:var(--ink-soft); border-top:1px solid var(--line-soft); vertical-align:top;}
+  .path-table td.c-yes{color:var(--teal-strong); font-weight:700;}
+  .path-table td.c-no{color:var(--warn); font-weight:700;}
+  @media (max-width:760px){
+    .path-row{grid-template-columns:1fr;}
+    .path-cond{border-right:none; border-bottom:1px solid var(--line-soft);}
+  }
+
+  /* ---- stage summary cards ---- */
+  .stage-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .stage-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px;
+  }
+  .stage-top{display:flex; align-items:center; gap:10px;}
+  .stage-no{
+    width:30px; height:30px; border-radius:50%; flex:none; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-weight:700; font-size:13px; color:#fff;
+  }
+  .stage-name{font-size:15px; font-weight:700; color:var(--ink);}
+  .stage-role{font-size:10.5px; font-weight:600; font-family:var(--font-mono);}
+  .stage-goal{font-size:12px; color:var(--ink-soft); line-height:1.6; border-top:1px solid var(--line-soft); padding-top:10px;}
+  .stage-form{
+    margin-top:auto; background:var(--surface-alt); border-radius:8px; padding:10px 12px;
+  }
+  .stage-form-label{font-size:9.5px; font-weight:700; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase;}
+  .stage-form-title{font-size:12.5px; font-weight:700; color:var(--ink); margin-top:3px;}
+  .stage-form-fields{font-size:10.5px; color:var(--muted); margin-top:4px; line-height:1.5;}
+
+  /* ---- flow-to-form comparison table (one row per stage) ---- */
+  .table-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);}
+  table.compare-table2{width:100%; min-width:1240px; border-collapse:collapse; background:var(--surface);}
+  .compare-table2 th{
+    background:var(--surface-alt); color:var(--ink); font-size:11.5px; font-weight:700;
+    text-align:left; padding:12px 16px; letter-spacing:0.02em; position:sticky; top:0;
+  }
+  .compare-table2 td{
+    padding:14px 16px; font-size:12.5px; color:var(--ink-soft); vertical-align:top;
+    border-top:1px solid var(--line-soft);
+  }
+  .compare-table2 tr:nth-child(even) td{background:var(--surface-alt);}
+  .compare-table2 td.stage-cell{
+    display:flex; align-items:baseline; gap:8px; color:var(--ink); font-weight:700; white-space:nowrap;
+  }
+  .stage-chip{
+    font-family:var(--font-mono); font-weight:700; font-size:11px; width:22px; height:22px;
+    border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#fff; flex:none;
+  }
+  .stage-sub{display:block; font-size:10px; font-weight:600; color:var(--muted); white-space:normal; margin-top:2px;}
+  .compare-table2 td.role-cell{font-weight:600; font-family:var(--font-mono); font-size:11.5px;}
+  .compare-table2 td.form-cell{font-weight:600; color:var(--ink);}
+  .form-link{display:inline-block; margin-top:6px; font-size:12px; font-weight:600; color:var(--teal-strong); text-decoration:none; border-bottom:1px solid currentColor; cursor:pointer;}
+  .form-link:hover{color:var(--teal);}
+  .fields-cell{display:flex; flex-direction:column; gap:5px;}
+  .field-line{display:flex; gap:6px; font-size:11.5px; line-height:1.45;}
+  .field-line b{color:var(--ink); font-weight:600; white-space:nowrap;}
+  .field-line span{color:var(--muted);}
+  .compare-table2 td.output-cell{
+    background:var(--teal-tint); color:var(--teal-strong); font-weight:600; font-size:12px;
+  }
+  .compare-table2 td.output-cell.is-amber{background:var(--amber-tint); color:var(--amber);}
+  .compare-table2 tr:nth-child(even) td.output-cell{background:var(--teal-tint);}
+  .compare-table2 tr:nth-child(even) td.output-cell.is-amber{background:var(--amber-tint);}
+
+  footer{padding:32px 0 56px; font-size:11.5px; color:var(--muted); font-family:var(--font-mono);}
+
+  @media (max-width:980px){
+    .role-grid{grid-template-columns:repeat(2,1fr);}
+    .stage-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    .topnav-inner{padding:0 18px;}
+    .role-grid{grid-template-columns:1fr;}
+    .stage-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <span class="topnav-brand">SOP／庫存作業</span>
+    <a href="#roles">角色定位</a>
+    <a href="#overview">全流程總覽</a>
+    <a href="#opencase">開案流程</a>
+    <a href="#salepaths">請購判斷路徑</a>
+    <a href="#procure">請購/採購流程</a>
+    <a href="#flow">出貨/借用流程</a>
+    <a href="#compare">流程對照總表</a>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <div class="eyebrow"><br></div>
+  <h1>硬體請採購及<span style="font-size: clamp(30px, 4vw, 42px); text-wrap-mode: initial;">庫存作業流程</span></h1>
+  <p class="hero-sub"><br></p>
+  <div class="flow-strip">
+    <span class="flow-chip">開案</span><span class="flow-arrow">→</span>
+    <span class="flow-chip">請購</span><span class="flow-arrow">→</span>
+    <span class="flow-chip">採購</span><span class="flow-arrow">→</span>
+    <span class="flow-chip">到貨</span><span class="flow-arrow">→</span>
+    <span class="flow-chip">驗收</span><span class="flow-arrow">→</span>
+    <span class="flow-chip">入庫</span><span class="flow-arrow">→</span>
+    <span class="flow-chip">出貨/借用申請</span><span class="flow-arrow">→</span>
+    <span class="flow-chip is-final">出庫</span>
+  </div>
+</header>
+
+<section id="roles" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Roles</div>
+    <h2>角色定位</h2>
+    <p class="section-desc">各角色的職責與涉入範圍。每個角色有專屬顏色，流程圖色點與總表主責欄皆採同色。</p>
+  </div>
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--slate); color:var(--slate)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M9,7 V5.5 a1,1 0 0 1 1,-1 h4 a1,1 0 0 1 1,1 V7" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><rect x="4" y="7" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></svg></div>
+      <div class="role-name">業務</div>
+      <div class="role-sub" style="color:var(--slate)">商機開發</div>
+      <div class="role-desc">登錄商機與需求，案子尚未成立，尚無請購或庫存行為。</div>
+      <div class="role-tag" style="background:var(--slate-tint); color:var(--slate)">涉入：商機與需求登錄</div>
+      <div class="role-note">案子尚未成立前的最上游角色，需求會作為後續請購量之參考基礎。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--teal); color:var(--teal)"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.6" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><line x1="12" y1="16" x2="12" y2="19" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="8" y1="19" x2="16" y2="19" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><circle cx="12" cy="7.3" r="0.55" fill="currentColor" stroke="none"></circle></svg></div>
+      <div class="role-name">一體機 PM</div>
+      <div class="role-sub" style="color:var(--teal)">方案孵化</div>
+      <div class="role-desc">孵化方案，確認所需軟硬體組合，不直接請購或決定備貨量。</div>
+      <div class="role-tag" style="background:var(--teal-tint); color:var(--teal-strong)">涉入：方案設計・軟硬體組合確認</div>
+      <div class="role-note">方案孵化階段，交棒硬體 PM 統籌後續備貨與請購；僅負責軟硬體方案孵化，不會出現在下方三張流程圖中。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--role-hwpm); color:var(--role-hwpm)"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><rect x="9.6" y="9.6" width="4.8" height="4.8" rx="0.6" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><line x1="9.6" y1="7" x2="9.6" y2="4.8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="14.4" y1="7" x2="14.4" y2="4.8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="9.6" y1="17" x2="9.6" y2="19.2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="14.4" y1="17" x2="14.4" y2="19.2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="9.6" x2="4.8" y2="9.6" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="14.4" x2="4.8" y2="14.4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="17" y1="9.6" x2="19.2" y2="9.6" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="17" y1="14.4" x2="19.2" y2="14.4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></svg></div>
+      <div class="role-name">硬體 PM</div>
+      <div class="role-sub" style="color:var(--role-hwpm)">庫存主案與備貨統籌</div>
+      <div class="role-desc">依硬體類別建立／沿用「庫存主案」，統籌備貨數量請購，並核准後續出售、借用、出貨。</div>
+      <div class="role-tag" style="background:var(--role-hwpm-tint); color:var(--role-hwpm)">涉入：開案（庫存主案）・請購・驗收（庫存備貨）・出貨／借用核准</div>
+      <div class="role-note">庫存去留的最終決策者；出貨／借用遇庫存不足時，會先詢問 Ben 是否要備貨再定案。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--amber); color:var(--amber)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M5,9 L12,5 L19,9" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><rect x="5" y="9" width="14" height="10" rx="1.4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><line x1="12" y1="9" x2="12" y2="19" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></svg></div>
+      <div class="role-name">專案 PM（大部分情況為策略事業處）</div>
+      <div class="role-sub" style="color:var(--amber)">銷售主案與出貨申請</div>
+      <div class="role-desc">已有明確客戶時，獨立建立「銷售主案」，再依庫存狀況擇一提出：庫存足夠或備貨（硬體 PM 決定備貨）→ 出貨申請；不備貨 → 於銷售主案下自行請購。</div>
+      <div class="role-tag" style="background:var(--amber-tint); color:var(--amber)">涉入：開案（銷售主案）・出貨申請或請購（擇一）・驗收（自行請購者）</div>
+      <div class="role-note">銷售主案不得掛於庫存主案之下；與硬體 PM 的庫存主案為兩條獨立路徑。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--role-wh); color:var(--role-wh)"><svg width="20" height="20" viewBox="0 0 24 24"><polyline points="4,11 12,5 20,11" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline><rect x="6" y="11" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><rect x="10.5" y="15" width="3" height="4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect></svg></div>
+      <div class="role-name">倉庫管理者</div>
+      <div class="role-sub" style="color:var(--role-wh)">實體庫存執行</div>
+      <div class="role-desc">依驗收單建立入庫單；依已核准之出貨／借用申請單實際撿貨出庫。</div>
+      <div class="role-tag" style="background:var(--role-wh-tint); color:var(--role-wh)">涉入：入庫・出庫（僅執行，不做核准判斷）</div>
+      <div class="role-note">提供庫存數字（帳上庫存），出庫與否仍需依申請單上的核准角色放行。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--warn); color:var(--warn)"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="9" rx="1.4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><path d="M4,10 L12,4 L20,10" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><line x1="9" y1="14" x2="15" y2="14" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></svg></div>
+      <div class="role-name">總務</div>
+      <div class="role-sub" style="color:var(--warn)">到貨收發／資產管理</div>
+      <div class="role-desc">代收公司倉到貨，並通知請購人員驗收；評估是否有閒置資產可以出借。</div>
+      <div class="role-tag" style="background:var(--warn-tint); color:var(--warn)">涉入：到貨代收・資產租用評估</div>
+      <div class="role-note">不涉及規格判斷；資產租用不足或不核准轉資產時，會併回庫存補貨判斷。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--role-proc); color:var(--role-proc)"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="9" cy="19" r="1.4" stroke="currentColor" stroke-width="1.7" fill="none"></circle><circle cx="17" cy="19" r="1.4" stroke="currentColor" stroke-width="1.7" fill="none"></circle><path d="M4,5 L6,5 L8.4,16 L18,16 L20,8 L7,8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div class="role-name">採購單位</div>
+      <div class="role-sub" style="color:var(--role-proc)">詢價下單</div>
+      <div class="role-desc">執行詢價議價與下單，追蹤交期，每週提供到公司倉之商品資訊予總務。</div>
+      <div class="role-tag" style="background:var(--role-proc-tint); color:var(--role-proc)">涉入：採購下單・交期追蹤</div>
+      <div class="role-note">不自行決定備貨數量，數量由硬體 PM／專案 PM 於請購單上決定。</div>
+    </div>
+    <div class="role-card">
+      <div class="role-badge" style="border-color:var(--role-int); color:var(--role-int)"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="7" height="7" rx="1.2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><rect x="13.5" y="8.5" width="7" height="7" rx="1.2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><line x1="10.5" y1="12" x2="13.5" y2="12" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></svg></div>
+      <div class="role-name">軟硬整合交付處</div>
+      <div class="role-sub" style="color:var(--role-int)">軟硬整合安裝</div>
+      <div class="role-desc">出貨或借用進行軟硬整合；銷售主案若需軟硬整合交付時建立子案紀錄工時；借用歸還時驗收；亦為出貨申請單簽核關卡之一。</div>
+      <div class="role-tag" style="background:var(--role-int-tint); color:var(--role-int)">涉入：整合安裝・出貨申請簽核・建立子案・歸還驗收</div>
+      <div class="role-note">庫存借用歸還流程之驗收窗口。</div>
+    </div>
+  </div>
+</section>
+
+<section id="overview" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Overview</div>
+    <h2>全流程總覽：角色 × 執行階段</h2>
+    <p class="section-desc">橫列為角色、直欄為階段：橫列是該角色負責的事，直欄是該階段的參與角色。</p><div>線色代表情境（見圖例），橘色虛線為庫存不足時回到「是否要備貨？（詢問 Ben）」的共用迴圈。</div><div>細節見下方三張展開流程圖。</div><p></p>
+    <div class="role-legend"><span><i class="rdot rdot-projpm"></i>專案 PM</span><span><i class="rdot rdot-hwpm"></i>硬體 PM</span><span><i class="rdot rdot-int"></i>軟硬整合交付處</span><span><i class="rdot rdot-wh"></i>倉庫管理者</span><span><i class="rdot rdot-ga"></i>總務</span><span><i class="rdot rdot-proc"></i>採購單位</span><span><i class="rdot rdot-neutral"></i>需求人員／保管人</span></div>
+    <div class="line-legend"><span><i style="border-color:var(--sc-stock)"></i>庫存備貨（請購→入庫主線）</span><span><i style="border-color:var(--sc-sale)"></i>銷售出貨</span><span><i style="border-color:var(--sc-borrow)"></i>庫存借用</span><span><i style="border-color:var(--sc-rent)"></i>資產租用</span><span><i style="border-color:var(--warn);border-top-style:dashed"></i>庫存不足→詢問 Ben（共用迴圈）</span><span><i style="border-color:var(--teal);border-top-style:dashed"></i>視需要（Ⓑ 子案）</span><span style="color:var(--muted)">Ⓐ Ⓑ＝同名連接符接續</span></div>
+  </div>
+  <figure class="diagram">
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1360 910" role="img" aria-label="全流程總覽泳道圖：橫列為七個角色（專案PM、硬體PM、軟硬整合交付處、倉庫管理者、總務、採購單位、需求人員），直欄為五個執行階段（開案、請購、採購到入庫、出貨借用申請、出庫）。開案階段：無客戶時硬體PM建立或沿用庫存主案，有客戶時專案PM建立銷售主案，需整合交付時由整合交付處建立子案。請購階段：硬體PM於庫存主案下建立庫存請購；庫存不足時硬體PM詢問Ben是否要備貨，要備貨則硬體PM請購，不備貨則專案PM於銷售主案下建立請購單。採購到入庫階段：採購單位下單，公司倉由總務收貨、請購人員驗收、倉管建立入庫單；客戶倉或廠商倉由供應商直送或暫存，不進實體倉，同樣經請購人驗收後由倉管依倉別建立入庫單。出貨借用申請階段：專案PM提出出貨需求由硬體PM評估庫存是否足夠；需求人員提出庫存借用或資產租用申請，租用先由總務評估閒置資產，無則由硬體PM評估庫存。出庫階段：專案PM填寫出貨申請單後由整合交付處安裝並安排貨運；借用由倉管出借並追蹤歸還，整合交付處驗收歸還並通知硬體PM；資產依資產管理規範出借。">
+        <defs>
+          <marker id="arrowO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
+          </marker>
+        </defs>
+
+        <!-- ===== lanes (role rows) ===== -->
+        <rect x="10" y="46" width="1340" height="116" rx="12" class="lane" style="fill:var(--amber-tint);opacity:.42"></rect>
+        <rect x="10" y="168" width="1340" height="214" rx="12" class="lane" style="fill:var(--role-hwpm-tint);opacity:.5"></rect>
+        <rect x="10" y="388" width="1340" height="94" rx="12" class="lane" style="fill:var(--role-int-tint);opacity:.5"></rect>
+        <rect x="10" y="488" width="1340" height="94" rx="12" class="lane" style="fill:var(--role-wh-tint);opacity:.5"></rect>
+        <rect x="10" y="588" width="1340" height="94" rx="12" class="lane" style="fill:var(--warn-tint);opacity:.45"></rect>
+        <rect x="10" y="688" width="1340" height="94" rx="12" class="lane" style="fill:var(--role-proc-tint);opacity:.55"></rect>
+        <rect x="10" y="788" width="1340" height="110" rx="12" class="lane" style="fill:var(--surface-alt);opacity:.8"></rect>
+
+        <!-- lane labels -->
+        <foreignObject x="20" y="92" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--amber)"><span class="rdot rdot-projpm"></span> 專案 PM</div></foreignObject>
+        <foreignObject x="20" y="258" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--role-hwpm)"><span class="rdot rdot-hwpm"></span> 硬體 PM</div></foreignObject>
+        <foreignObject x="20" y="826" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--muted)"><span class="rdot rdot-neutral"></span> 需求人員<br>（保管人）</div></foreignObject>
+        <foreignObject x="20" y="518" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--role-wh)"><span class="rdot rdot-wh"></span> 倉庫管理者</div></foreignObject>
+        <foreignObject x="20" y="618" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--warn)"><span class="rdot rdot-ga"></span> 總務</div></foreignObject>
+        <foreignObject x="20" y="718" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--role-proc)"><span class="rdot rdot-proc"></span> 採購單位</div></foreignObject>
+        <foreignObject x="20" y="418" width="124" height="34"><div class="svg-edit left" style="font-size:12px;font-weight:700;color:var(--role-int)"><span class="rdot rdot-int"></span> 軟硬整合交付處</div></foreignObject>
+
+        <!-- ===== stage columns (headers + separators) ===== -->
+        <line x1="150" y1="46" x2="150" y2="898" style="stroke:var(--line);stroke-width:1.2"></line>
+        <line x1="390" y1="46" x2="390" y2="898" style="stroke:var(--line);stroke-width:1;stroke-dasharray:4 4"></line>
+        <line x1="630" y1="46" x2="630" y2="898" style="stroke:var(--line);stroke-width:1;stroke-dasharray:4 4"></line>
+        <line x1="870" y1="46" x2="870" y2="898" style="stroke:var(--line);stroke-width:1;stroke-dasharray:4 4"></line>
+        <line x1="1110" y1="46" x2="1110" y2="898" style="stroke:var(--line);stroke-width:1;stroke-dasharray:4 4"></line>
+
+        <rect x="156" y="8" width="228" height="30" rx="8" style="fill:var(--surface-alt);stroke:var(--line);stroke-width:1"></rect>
+        <foreignObject x="158" y="10" width="224" height="26"><div class="svg-edit" style="font-size:12px;font-weight:700">① 開案</div></foreignObject>
+        <rect x="396" y="8" width="228" height="30" rx="8" style="fill:var(--surface-alt);stroke:var(--line);stroke-width:1"></rect>
+        <foreignObject x="398" y="10" width="224" height="26"><div class="svg-edit" style="font-size:12px;font-weight:700">② 請購</div></foreignObject>
+        <rect x="636" y="8" width="228" height="30" rx="8" style="fill:var(--surface-alt);stroke:var(--line);stroke-width:1"></rect>
+        <foreignObject x="638" y="10" width="224" height="26"><div class="svg-edit" style="font-size:12px;font-weight:700">③～⑥ 採購 → 到貨 → 驗收 → 入庫</div></foreignObject>
+        <rect x="876" y="8" width="228" height="30" rx="8" style="fill:var(--surface-alt);stroke:var(--line);stroke-width:1"></rect>
+        <foreignObject x="878" y="10" width="224" height="26"><div class="svg-edit" style="font-size:12px;font-weight:700">⑦ 出貨／借用申請</div></foreignObject>
+        <rect x="1116" y="8" width="228" height="30" rx="8" style="fill:var(--surface-alt);stroke:var(--line);stroke-width:1"></rect>
+        <foreignObject x="1118" y="10" width="224" height="26"><div class="svg-edit" style="font-size:12px;font-weight:700">⑧ 出庫</div></foreignObject>
+
+        <!-- ===== L1 專案 PM ===== -->
+        <rect x="278" y="86" width="108" height="54" rx="10" class="node node-core"></rect>
+        <foreignObject x="281" y="89" width="102" height="48"><div class="svg-edit on-core" style="font-size:10px;font-weight:600">建立「銷售主案」<br>（有客戶）</div></foreignObject>
+        <rect x="405" y="86" width="210" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="408" y="89" width="204" height="48"><div class="svg-edit" style="font-size:10.5px;font-weight:600">銷售主案下建立請購單<br>（不備貨時，不走出貨申請單）</div></foreignObject>
+        <rect x="760" y="86" width="106" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="762" y="89" width="102" height="48"><div class="svg-edit" style="font-size:9.5px;font-weight:600">驗收<br>（銷售主案之請購）</div></foreignObject>
+        <rect x="1005" y="86" width="95" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1008" y="89" width="89" height="48"><div class="svg-edit" style="font-size:10.5px;font-weight:600">向硬體 PM<br>提出出貨需求</div></foreignObject>
+        <rect x="1140" y="86" width="110" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1143" y="89" width="104" height="48"><div class="svg-edit" style="font-size:10.5px;font-weight:600">填寫「出貨申請單」<br>申請出貨</div></foreignObject>
+
+        <!-- ===== L2 硬體 PM ===== -->
+        <rect x="158" y="190" width="114" height="56" rx="10" class="node node-core"></rect>
+        <foreignObject x="161" y="193" width="108" height="50"><div class="svg-edit on-core" style="font-size:9.5px;font-weight:600">建立／沿用「庫存主案」<br>（無客戶．備貨）</div></foreignObject>
+        <rect x="405" y="190" width="115" height="56" rx="10" class="node node-core"></rect>
+        <foreignObject x="408" y="193" width="109" height="50"><div class="svg-edit on-core" style="font-size:10px;font-weight:600">於庫存主案下<br>建立庫存請購</div></foreignObject>
+        <rect x="760" y="190" width="106" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="762" y="193" width="102" height="50"><div class="svg-edit" style="font-size:9.5px;font-weight:600">驗收<br>（庫存主案之請購）</div></foreignObject>
+        <!-- 驗收 alternative performer: 專案 PM (L1) -->
+        <line x1="813" y1="190" x2="813" y2="140" style="stroke:var(--muted);stroke-width:1.4;stroke-dasharray:3 3"></line>
+        <foreignObject x="818" y="150" width="70" height="14"><div class="svg-edit left muted" style="font-size:9px">或，依請購人</div></foreignObject>
+        <rect x="1140" y="190" width="110" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1143" y="193" width="104" height="50"><div class="svg-edit" style="font-size:10px;font-weight:600">審核<br>出貨申請（領貨）</div></foreignObject>
+        <rect x="1140" y="303" width="110" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1143" y="306" width="104" height="48"><div class="svg-edit" style="font-size:9.5px;font-weight:600">庫存轉資產<br>（租用・總經理核准）</div></foreignObject>
+        <foreignObject x="1142" y="360" width="90" height="14"><div class="svg-edit left muted" style="font-size:8.5px">不核准→回備貨判斷</div></foreignObject>
+        <polygon points="1055,184 1100,218 1055,252 1010,218" class="node node-decision"></polygon>
+        <foreignObject x="1013" y="204" width="84" height="28"><div class="svg-edit diamond" style="font-size:9.5px">評估<br>庫存足夠？</div></foreignObject>
+        <polygon points="560,296 610,330 560,364 510,330" class="node node-decision-amber"></polygon>
+        <foreignObject x="515" y="316" width="90" height="28"><div class="svg-edit diamond-amber" style="font-size:9.5px">是否要備貨？<br>（詢問 Ben）</div></foreignObject>
+        <polygon points="940,296 985,330 940,364 895,330" class="node node-decision"></polygon>
+        <foreignObject x="898" y="316" width="84" height="28"><div class="svg-edit diamond" style="font-size:9.5px">評估<br>可借用／足夠？</div></foreignObject>
+
+        <!-- ===== L3 需求人員 ===== -->
+        <rect x="405" y="816" width="210" height="54" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="408" y="819" width="204" height="48"><div class="svg-edit terminal" style="font-size:10px">回歸需求單位，後續自行請購<br>（借用／租用．本申請結束）</div></foreignObject>
+        <rect x="960" y="852" width="135" height="40" rx="10" class="node node-plain"></rect>
+        <foreignObject x="963" y="854" width="129" height="36"><div class="svg-edit" style="font-size:10px;font-weight:600">需求人員（保管人）<br>提出「庫存借用」申請</div></foreignObject>
+        <rect x="960" y="800" width="135" height="40" rx="10" class="node node-plain"></rect>
+        <foreignObject x="963" y="802" width="129" height="36"><div class="svg-edit" style="font-size:10px;font-weight:600">需求人員（保管人）<br>提出「資產租用」申請</div></foreignObject>
+
+        <!-- ===== L4 倉庫管理者 ===== -->
+        <rect x="790" y="508" width="76" height="54" rx="10" class="node node-end"></rect>
+        <foreignObject x="792" y="511" width="72" height="48"><div class="svg-edit on-end" style="font-size:9.5px;font-weight:600"><span>建立入庫單<br><span style="font-size:8.5px">（供出貨／借用）</span></span></div></foreignObject>
+        <rect x="1120" y="508" width="65" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1123" y="511" width="59" height="48"><div class="svg-edit" style="font-size:10.5px;font-weight:600">出借<br>追蹤歸還</div></foreignObject>
+        <rect x="1252" y="508" width="78" height="54" rx="10" class="node node-end"></rect>
+        <foreignObject x="1255" y="511" width="72" height="48"><div class="svg-edit on-end" style="font-size:9px;font-weight:600">建立出庫單<br>（扣減庫存）</div></foreignObject>
+
+        <!-- ===== L5 總務 ===== -->
+        <rect x="650" y="608" width="90" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="653" y="611" width="84" height="48"><div class="svg-edit" style="font-size:10.5px;font-weight:600">收貨<br>（公司倉）</div></foreignObject>
+        <polygon points="1058,603 1106,635 1058,667 1010,635" class="node node-decision"></polygon>
+        <foreignObject x="1013" y="621" width="90" height="28"><div class="svg-edit diamond" style="font-size:9px">評估閒置資產符合規格？</div></foreignObject>
+        <rect x="1160" y="608" width="90" height="54" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="1163" y="611" width="84" height="48"><div class="svg-edit terminal" style="font-size:9px">資產出借<br>（依資產管理規範）</div></foreignObject>
+
+        <!-- ===== L6 採購單位 ===== -->
+        <rect x="650" y="708" width="90" height="54" rx="10" class="node node-core"></rect>
+        <foreignObject x="653" y="711" width="84" height="48"><div class="svg-edit on-core" style="font-size:10.5px;font-weight:600">執行採購下單</div></foreignObject>
+        <rect x="765" y="708" width="100" height="54" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="768" y="711" width="94" height="48"><div class="svg-edit terminal" style="font-size:9px">供應商直送客戶端／<br>暫存廠商倉<br>（不進實體倉）</div></foreignObject>
+
+        <!-- ===== L7 軟硬整合交付處 ===== -->
+        <rect x="255" y="426" width="130" height="48" rx="10" class="node node-plain"></rect>
+        <foreignObject x="258" y="428" width="124" height="44"><div class="svg-edit" style="font-size:10px;font-weight:600">於銷售主案下建立子案<br>（紀錄工時）</div></foreignObject>
+        <rect x="1120" y="408" width="95" height="54" rx="10" class="node node-end"></rect>
+        <foreignObject x="1123" y="411" width="89" height="48"><div class="svg-edit on-end" style="font-size:10px;font-weight:600">驗收歸還</div></foreignObject>
+        <rect x="1252" y="408" width="78" height="54" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1255" y="411" width="72" height="48"><div class="svg-edit" style="font-size:9.5px;font-weight:600">軟硬整合安裝<br>安排貨運出貨</div></foreignObject>
+
+        <!-- ===== edges: 開案 → 出貨需求 (top channel) ===== -->
+        <!-- connector A: 銷售主案 → 出貨需求 -->
+        <line x1="330" y1="86" x2="330" y2="74" class="sc-sale"></line>
+        <circle cx="330" cy="66" r="8" class="connector sc-sale"></circle>
+        <foreignObject x="322" y="59" width="16" height="14"><div class="svg-edit" style="font-size:9px;font-weight:700;color:var(--sc-sale)">A</div></foreignObject>
+        <circle cx="1055" cy="66" r="8" class="connector sc-sale"></circle>
+        <foreignObject x="1047" y="59" width="16" height="14"><div class="svg-edit" style="font-size:9px;font-weight:700;color:var(--sc-sale)">A</div></foreignObject>
+        <line x1="1055" y1="74" x2="1055" y2="86" class="sc-sale" marker-end="url(#arrowO)"></line>
+        <foreignObject x="880" y="59" width="164" height="14"><div class="svg-edit muted" style="font-size:9px;justify-content:flex-end;text-align:right">Ⓐ 銷售主案成立後，提出出貨需求</div></foreignObject>
+        <!-- connector B: 專案PM → 整合交付處 子案 (optional) -->
+        <line x1="330" y1="140" x2="330" y2="144" class="info-line"></line>
+        <circle cx="330" cy="152" r="8" class="connector info-line" style="stroke-dasharray:none"></circle>
+        <foreignObject x="322" y="145" width="16" height="14"><div class="svg-edit" style="font-size:9px;font-weight:700;color:var(--teal)">B</div></foreignObject>
+        <circle cx="330" cy="406" r="8" class="connector info-line" style="stroke-dasharray:none"></circle>
+        <foreignObject x="322" y="399" width="16" height="14"><div class="svg-edit" style="font-size:9px;font-weight:700;color:var(--teal)">B</div></foreignObject>
+        <line x1="330" y1="414" x2="330" y2="426" class="info-line" marker-end="url(#arrowO)"></line>
+        <foreignObject x="158" y="399" width="160" height="14"><div class="svg-edit muted" style="font-size:9px;justify-content:flex-end;text-align:right">Ⓑ 需整合交付時，建立子案</div></foreignObject>
+
+        <!-- ===== edges: 請購 ===== -->
+        <line x1="272" y1="218" x2="405" y2="218" class="sc-stock" marker-end="url(#arrowO)"></line>
+        <path d="M520,218 L632,218 L632,735 L650,735" class="sc-stock" marker-end="url(#arrowO)"></path>
+        <path d="M615,113 L632,113 L632,218" class="sc-sale"></path>
+        <foreignObject x="638" y="584" width="60" height="14"><div class="svg-edit left muted" style="font-size:9.5px">請購單→採購</div></foreignObject>
+        <!-- Ben 判斷 → 分流 -->
+        <path d="M560,296 L560,140" class="sc-sale" marker-end="url(#arrowO)"></path>
+        <foreignObject x="455" y="146" width="100" height="14"><div class="svg-edit no" style="font-size:10px;justify-content:flex-end;text-align:right">否｜不備貨（出貨）</div></foreignObject>
+        <path d="M560,364 L560,816" class="sc-borrow" marker-end="url(#arrowO)"></path>
+        <foreignObject x="405" y="372" width="150" height="14"><div class="svg-edit no" style="font-size:9.5px;justify-content:flex-end;text-align:right">否｜不備貨（借用／租用）</div></foreignObject>
+        <path d="M510,330 L462,330 L462,246" class="sc-stock" marker-end="url(#arrowO)"></path>
+        <foreignObject x="468" y="262" width="60" height="14"><div class="svg-edit left yes" style="font-size:10px">是｜要備貨</div></foreignObject>
+
+        <!-- ===== edges: 採購 → 到貨 → 驗收 → 入庫 ===== -->
+        <line x1="740" y1="735" x2="765" y2="735" class="sc-stock" marker-end="url(#arrowO)"></line>
+        <foreignObject x="778" y="692" width="90" height="14"><div class="svg-edit left muted" style="font-size:9.5px">客戶倉／廠商倉</div></foreignObject>
+        <line x1="695" y1="708" x2="695" y2="662" class="sc-stock" marker-end="url(#arrowO)"></line>
+        <foreignObject x="700" y="670" width="44" height="14"><div class="svg-edit left muted" style="font-size:9.5px">公司倉</div></foreignObject>
+        <path d="M740,635 L752,635 L752,258 L812,258 L812,246" class="sc-stock" marker-end="url(#arrowO)"></path>
+        <path d="M840,246 L840,508" class="sc-stock" marker-end="url(#arrowO)"></path>
+        <path d="M772,708 L772,258" class="sc-stock"></path>
+        <foreignObject x="777" y="612" width="60" height="26"><div class="svg-edit left muted" style="font-size:9px">經請購人員驗收</div></foreignObject>
+
+        <!-- ===== edges: 出貨需求 → 庫存判斷 ===== -->
+        <line x1="1055" y1="140" x2="1055" y2="184" class="sc-sale" marker-end="url(#arrowO)"></line>
+        <path d="M1100,218 L1112,218 L1112,113 L1140,113" class="sc-sale" marker-end="url(#arrowO)"></path>
+        <foreignObject x="1118" y="152" width="70" height="14"><div class="svg-edit left yes" style="font-size:10px">是｜足夠</div></foreignObject>
+        <line x1="1195" y1="140" x2="1195" y2="190" class="sc-sale" marker-end="url(#arrowO)"></line>
+        <path d="M1250,218 L1342,218 L1342,435 L1330,435" class="sc-sale" marker-end="url(#arrowO)"></path>
+        <line x1="1300" y1="462" x2="1300" y2="508" class="sc-sale" marker-end="url(#arrowO)"></line>
+
+        <!-- ===== edges: 庫存不足 → 回到請購（Ben 判斷）— orange dashed loop with hop at x=632 ===== -->
+        <path d="M1010,218 L998,218 L998,178 L821,178 A8,8 0 0 0 805,178 L640,178 A8,8 0 0 0 624,178 L618,178 L618,330 L610,330" class="exc-line" marker-end="url(#arrowO)"></path>
+        <path d="M940,296 L940,178" class="exc-line"></path>
+        <foreignObject x="640" y="163" width="170" height="14"><div class="svg-edit left warn-curve" style="font-size:9.5px">否｜庫存不足→詢問 Ben 是否要備貨</div></foreignObject>
+
+        <!-- ===== edges: 借用／租用 ===== -->
+        <path d="M960,872 L882,872 L882,330 L895,330" class="sc-borrow" marker-end="url(#arrowO)"></path>
+        <path d="M1010,635 L882,635" class="sc-rent"></path>
+        <foreignObject x="890" y="620" width="118" height="14"><div class="svg-edit left no" style="font-size:9.5px">否｜無閒置資產</div></foreignObject>
+        <line x1="1058" y1="800" x2="1058" y2="667" class="sc-rent" marker-end="url(#arrowO)"></line>
+        <line x1="1106" y1="635" x2="1160" y2="635" class="sc-rent" marker-end="url(#arrowO)"></line>
+        <foreignObject x="1116" y="618" width="40" height="14"><div class="svg-edit yes" style="font-size:10px">是</div></foreignObject>
+        <path d="M985,330 L1108,330 L1108,535 L1120,535" class="sc-borrow" marker-end="url(#arrowO)"></path>
+        <path d="M1108,330 L1140,330" class="sc-rent" marker-end="url(#arrowO)"></path>
+        <path d="M1235,357 L1235,608" class="sc-rent" marker-end="url(#arrowO)"></path>
+        <foreignObject x="992" y="314" width="118" height="14"><div class="svg-edit left yes" style="font-size:10px">是｜可借用／調撥</div></foreignObject>
+        <foreignObject x="992" y="334" width="120" height="14"><div class="svg-edit left muted" style="font-size:9px">庫存借用→出借；資產租用→轉資產</div></foreignObject>
+        <path d="M1148,508 L1148,462" class="sc-borrow" marker-end="url(#arrowO)"></path>
+      </svg>
+    </div>
+    <figcaption>庫存不足一律由硬體 PM 詢問 Ben 是否要備貨：要備貨→硬體 PM 於庫存主案請購；不備貨→出貨由專案 PM 於銷售主案請購（不走出貨申請單），庫存借用／資產租用回歸需求單位自行請購。驗收由請購人本人執行。</figcaption>
+  </figure>
+</section>
+
+<section id="opencase" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Process Map</div>
+    <h2>開案流程：依用途分流為庫存主案／銷售主案</h2>
+    <p class="section-desc"><br></p>
+    <div class="role-legend"><span><i class="rdot rdot-sales"></i>業務</span><span><i class="rdot rdot-hwpm"></i>硬體 PM</span><span><i class="rdot rdot-projpm"></i>專案 PM</span><span><i class="rdot rdot-int"></i>軟硬整合交付處</span></div>
+  </div>
+  <figure class="diagram">
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1360 930" role="img" aria-label="開案流程圖：業務或硬體PM提出開案需求後，先判斷是否已有明確客戶。無客戶（目的為備貨）時，由硬體PM確認是否已有該硬體類別之庫存主案，若無則建立庫存主案，若有則沿用，之後硬體PM於庫存主案下開立庫存請購，銜接主線請購流程。有客戶時，專案PM一律建立獨立銷售主案，不得掛於庫存主案之下；再判斷現有庫存是否足夠，足夠則由專案PM動用既有庫存提出出貨申請，不足則由硬體PM詢問Ben是否要備貨：要備貨則硬體PM於庫存主案下請購，備貨後專案以出貨申請單領貨；不備貨則由專案PM於銷售主案下直接請購，直接交付專案不走出貨申請單；另外需就是否需整合交付處協助硬體整合交付作業進行判斷，需要則由整合交付處於銷售主案下建立子案登記工時，不需要則結束並依銷售主案執行後續採購或出貨作業。">
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
+          </marker>
+        </defs>
+
+        <rect x="14" y="310" width="140" height="64" rx="10" class="node node-input"></rect>
+        <foreignObject x="17" y="313" width="134" height="58"><div class="svg-edit" style="font-size:12px;font-weight:600"><span class="rdot rdot-sales"></span><span class="rdot rdot-hwpm"></span> 業務／硬體PM<br>提出需求</div></foreignObject>
+        <line x1="154" y1="342" x2="190" y2="342" class="flow-line" marker-end="url(#arrow2)"></line>
+        <polygon points="260,252 330,342 260,432 190,342" class="node node-decision"></polygon>
+        <foreignObject x="212" y="318" width="96" height="48"><div class="svg-edit diamond" style="font-size:12px">是否已有<br>明確客戶？</div></foreignObject>
+
+        <rect x="370" y="16" width="980" height="230" rx="16" class="lane lane-bg"></rect>
+        <foreignObject x="390" y="26" width="420" height="20"><div class="svg-edit left lane-bg" style="font-size:13px">路徑一｜庫存備貨採購（無特定客戶．硬體 PM 請購）</div></foreignObject>
+        <path d="M260,252 L260,131 L418,131" class="flow-line" marker-end="url(#arrow2)"></path>
+        <foreignObject x="280" y="106" width="150" height="18"><div class="svg-edit left muted" style="font-size:11px">否｜無客戶，目的為備貨</div></foreignObject>
+
+        <polygon points="480,76 542,131 480,186 418,131" class="node node-decision"></polygon>
+        <foreignObject x="442" y="113" width="76" height="36"><div class="svg-edit diamond" style="font-size:11px">是否已有<br>庫存主案？</div></foreignObject>
+
+        <rect x="610" y="101" width="200" height="60" rx="10" class="node node-core"></rect>
+        <foreignObject x="613" y="104" width="194" height="54"><div class="svg-edit on-core" style="font-size:12.5px;font-weight:600"><span class="rdot rdot-hwpm"></span> 硬體 PM 建立「庫存主案」<br>（依硬體類別，如GB10）</div></foreignObject>
+        <line x1="542" y1="131" x2="610" y2="131" class="flow-line" marker-end="url(#arrow2)"></line>
+        <foreignObject x="548" y="112" width="60" height="18"><div class="svg-edit no" style="font-size:11px">否</div></foreignObject>
+
+        <rect x="870" y="101" width="200" height="60" rx="10" class="node node-plain"></rect>
+        <foreignObject x="873" y="104" width="194" height="54"><div class="svg-edit" style="font-size:12.5px;font-weight:600"><span class="rdot rdot-hwpm"></span> 硬體 PM 於庫存主案下<br>建立庫存請購</div></foreignObject>
+        <line x1="810" y1="131" x2="870" y2="131" class="flow-line" marker-end="url(#arrow2)"></line>
+        <path d="M480,186 L480,230 L970,230 L970,161" class="flow-line" marker-end="url(#arrow2)"></path>
+        <foreignObject x="620" y="207" width="200" height="18"><div class="svg-edit left yes" style="font-size:11px">是｜沿用既有庫存主案</div></foreignObject>
+
+        <rect x="1120" y="101" width="200" height="60" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="1123" y="104" width="194" height="54"><div class="svg-edit terminal" style="font-size:11.5px">銜接｜請購流程<br></div></foreignObject>
+        <line x1="1070" y1="131" x2="1120" y2="131" class="flow-line" marker-end="url(#arrow2)"></line>
+
+        <rect x="370" y="262" width="980" height="635" rx="16" class="lane lane-amber"></rect>
+        <foreignObject x="390" y="272" width="460" height="20"><div class="svg-edit left lane-amber-text" style="font-size:13px">路徑二｜特定客戶銷售專案（有客戶．專案 PM 請購）</div></foreignObject>
+        <path d="M260,432 L260,490 L410,490" class="flow-line" marker-end="url(#arrow2)"></path>
+        <foreignObject x="272" y="460" width="140" height="20"><div class="svg-edit left yes" style="font-size:11px">是｜已有明確客戶</div></foreignObject>
+
+        <rect x="410" y="455" width="230" height="70" rx="10" class="node node-core"></rect>
+        <foreignObject x="413" y="458" width="224" height="64"><div class="svg-edit on-core" style="font-size:12.5px;font-weight:600"><span class="rdot rdot-projpm"></span> 專案 PM 建立「銷售主案」<br>（獨立開案，不得掛庫存主案子案）</div></foreignObject>
+
+        <polygon points="740,435 802,490 740,545 678,490" class="node node-decision-amber"></polygon>
+        <foreignObject x="702" y="472" width="76" height="36"><div class="svg-edit diamond-amber" style="font-size:11px">現有庫存<br>是否足夠？</div></foreignObject>
+        <line x1="640" y1="490" x2="678" y2="490" class="flow-line" marker-end="url(#arrow2)"></line>
+
+        <rect x="870" y="460" width="180" height="60" rx="10" class="node node-plain"></rect>
+        <foreignObject x="873" y="463" width="174" height="54"><div class="svg-edit" style="font-size:12px;font-weight:600"><span class="rdot rdot-projpm"></span> 專案 PM<br>動用既有庫存，提出出貨申請</div></foreignObject>
+        <line x1="802" y1="490" x2="870" y2="490" class="flow-line" marker-end="url(#arrow2)"></line>
+        <foreignObject x="815" y="471" width="40" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+
+        <rect x="1090" y="460" width="200" height="60" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="1093" y="463" width="194" height="54"><div class="svg-edit terminal" style="font-size:11.5px">銜接｜出貨流程</div></foreignObject>
+        <line x1="1050" y1="490" x2="1090" y2="490" class="flow-line" marker-end="url(#arrow2)"></line>
+
+        <path d="M740,545 L740,585 L868,585" class="flow-line" marker-end="url(#arrow2)"></path>
+        <foreignObject x="750" y="562" width="110" height="18"><div class="svg-edit no" style="font-size:11px">否｜庫存不足</div></foreignObject>
+        <polygon points="930,545 992,585 930,625 868,585" class="node node-decision-amber"></polygon>
+        <foreignObject x="886" y="565" width="88" height="40"><div class="svg-edit diamond-amber" style="font-size:9.5px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估<br>是否要備貨？<br>（詢問 Ben）</div></foreignObject>
+        <line x1="992" y1="585" x2="1020" y2="585" class="flow-line" marker-end="url(#arrow2)"></line>
+        <foreignObject x="994" y="566" width="30" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+        <path d="M930,625 L930,670 L1020,670" class="flow-line" marker-end="url(#arrow2)"></path>
+        <foreignObject x="938" y="648" width="70" height="18"><div class="svg-edit left no" style="font-size:11px">否｜不備貨</div></foreignObject>
+
+        <rect x="1020" y="555" width="170" height="60" rx="10" class="node node-core"></rect>
+        <foreignObject x="1023" y="558" width="164" height="54"><div class="svg-edit on-core" style="font-size:11px;font-weight:600"><span><span class="rdot rdot-hwpm"></span> 硬體 PM 於庫存主案下請購<br><span style="font-weight:400;font-size:9.5px">（備貨後，專案以出貨申請單領貨）</span></span></div></foreignObject>
+        <rect x="1020" y="640" width="170" height="60" rx="10" class="node node-plain"></rect>
+        <foreignObject x="1023" y="643" width="164" height="54"><div class="svg-edit" style="font-size:11px;font-weight:600"><span><span class="rdot rdot-projpm"></span> 專案 PM 於銷售主案下請購<br><span style="font-weight:400;font-size:9.5px">（直接交付專案，不走出貨申請單）</span></span></div></foreignObject>
+
+        <rect x="1215" y="555" width="125" height="145" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="1218" y="558" width="119" height="139"><div class="svg-edit terminal" style="font-size:11.5px">銜接｜<br>請購流程</div></foreignObject>
+        <line x1="1190" y1="585" x2="1215" y2="585" class="flow-line" marker-end="url(#arrow2)"></line>
+        <line x1="1190" y1="670" x2="1215" y2="670" class="flow-line" marker-end="url(#arrow2)"></line>
+
+        <line x1="525" y1="525" x2="525" y2="695" class="flow-line" marker-end="url(#arrow2)"></line>
+        <polygon points="525,695 593,755 525,815 457,755" class="node node-decision-amber"></polygon>
+        <foreignObject x="483" y="734" width="84" height="42"><div class="svg-edit diamond-amber" style="font-size:10.5px">是否需整合<br>交付處協助？</div></foreignObject>
+
+        <rect x="700" y="725" width="230" height="62" rx="10" class="node node-core"></rect>
+        <foreignObject x="703" y="728" width="224" height="56"><div class="svg-edit on-core" style="font-size:12px;font-weight:600"><span class="rdot rdot-int"></span> 軟硬整合交付處<br>於銷售主案下建立子案（紀錄工時）</div></foreignObject>
+        <line x1="593" y1="755" x2="700" y2="755" class="flow-line" marker-end="url(#arrow2)"></line>
+        <foreignObject x="625" y="735" width="40" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+
+        <rect x="990" y="725" width="200" height="62" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="993" y="728" width="194" height="56"><div class="svg-edit terminal" style="font-size:11.5px"><span class="rdot rdot-int"></span> 軟硬整合交付處<br>工時填寫</div></foreignObject>
+        <line x1="930" y1="755" x2="990" y2="755" class="flow-line" marker-end="url(#arrow2)"></line>
+
+        <path d="M525,815 L525,846 L700,846" class="flow-line" marker-end="url(#arrow2)"></path>
+        <foreignObject x="548" y="823" width="30" height="18"><div class="svg-edit no" style="font-size:11px">否</div></foreignObject>
+
+        <rect x="700" y="815" width="260" height="62" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="703" y="818" width="254" height="56"><div class="svg-edit terminal" style="font-size:11.5px">結束｜依銷售主案<br>執行後續採購／出貨作業</div></foreignObject>
+
+      </svg>
+    </div>
+    <figcaption><br></figcaption>
+  </figure>
+</section>
+
+<section id="salepaths" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Sales Project</div>
+    <h2>銷售主案下專案 PM 是否需請購的三條判斷路徑（擇一）</h2>
+    <p class="section-desc">接續開案流程的路徑二（有客戶）：銷售主案成立後，先由硬體 PM 評估庫存是否足夠；不足時再由硬體 PM 詢問 Ben 是否要備貨。結果只會落在以下其中一條，專案 PM 不會同時提出請購與出貨申請。</p>
+  </div>
+  <div class="path-list">
+
+    <div class="path-row">
+      <div class="path-cond">
+        <div class="path-cond-top"><span class="path-no" style="background:var(--teal)">1</span><span class="path-title">庫存足夠</span></div>
+        <div class="path-when">硬體 PM 評估現有庫存可支應</div>
+      </div>
+      <div class="path-body">
+        <div class="path-steps">
+          <span class="step is-pm"><i class="rdot rdot-projpm"></i>專案 PM 提出出貨申請</span><span class="step-arrow">→</span>
+          <span class="step"><i class="rdot rdot-hwpm"></i>硬體 PM 審核（領貨）</span><span class="step-arrow">→</span>
+          <span class="step"><i class="rdot rdot-int"></i>整合交付處 安裝・出貨</span><span class="step-arrow">→</span>
+          <span class="step is-end"><i class="rdot rdot-wh"></i>倉管 建立出庫單</span>
+        </div>
+        <div class="path-pm">專案 PM：<b>只提出貨申請</b>　<span class="no">不請購</span></div>
+      </div>
+    </div>
+
+    <div class="path-row">
+      <div class="path-cond">
+        <div class="path-cond-top"><span class="path-no" style="background:var(--role-hwpm)">2</span><span class="path-title">庫存不足・要備貨</span></div>
+        <div class="path-when">硬體 PM 詢問 Ben 後，決定備貨</div>
+      </div>
+      <div class="path-body">
+        <div class="path-steps">
+          <span class="step"><i class="rdot rdot-hwpm"></i>硬體 PM 於庫存主案下請購</span><span class="step-arrow">→</span>
+          <span class="step is-muted">採購 → 到貨 → 驗收 → 入庫</span><span class="step-arrow">→</span>
+          <span class="step is-pm"><i class="rdot rdot-projpm"></i>專案 PM 提出出貨申請</span><span class="step-arrow">→</span>
+          <span class="step is-muted">同路徑 1，至倉管建立出庫單</span>
+        </div>
+        <div class="path-pm">專案 PM：<b>貨入庫後提出貨申請</b>　<span class="no">不請購</span>（請購由硬體 PM 負責）</div>
+      </div>
+    </div>
+
+    <div class="path-row">
+      <div class="path-cond">
+        <div class="path-cond-top"><span class="path-no" style="background:var(--amber)">3</span><span class="path-title">庫存不足・不備貨</span></div>
+        <div class="path-when">硬體 PM 詢問 Ben 後，決定不備貨</div>
+      </div>
+      <div class="path-body">
+        <div class="path-steps">
+          <span class="step is-pm"><i class="rdot rdot-projpm"></i>專案 PM 於銷售主案下請購</span><span class="step-arrow">→</span>
+          <span class="step is-muted">採購 → 到貨</span><span class="step-arrow">→</span>
+          <span class="step is-pm"><i class="rdot rdot-projpm"></i>專案 PM 驗收</span><span class="step-arrow">→</span>
+          <span class="step is-end">直接交付專案</span>
+        </div>
+        <div class="path-pm">專案 PM：<b>只請購（並驗收）</b>　<span class="no">不走出貨申請單</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="table-scroll path-summary">
+    <table class="path-table">
+      <thead>
+        <tr>
+          <th>路徑</th>
+          <th>請購（由誰・掛在哪個主案）</th>
+          <th>專案 PM 提出貨申請？</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1 庫存足夠</td><td>無需請購</td><td class="c-yes">是</td></tr>
+        <tr><td>2 庫存不足・要備貨</td><td>硬體 PM・庫存主案</td><td class="c-yes">是（貨入庫後）</td></tr>
+        <tr><td>3 庫存不足・不備貨</td><td>專案 PM・銷售主案</td><td class="c-no">否（直接交付專案）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="procure" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Process Map</div>
+    <h2>請購／採購流程：依到貨倉別分流</h2>
+    <p class="section-desc"><br></p>
+    <div class="role-legend"><span><i class="rdot rdot-hwpm"></i>硬體 PM</span><span><i class="rdot rdot-projpm"></i>專案 PM</span><span><i class="rdot rdot-proc"></i>採購單位</span><span><i class="rdot rdot-ga"></i>總務</span><span><i class="rdot rdot-wh"></i>倉庫管理者</span></div>
+  </div>
+  <figure class="diagram">
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1360 560" role="img" aria-label="請購採購流程圖：硬體PM或專案PM建立已核准之請購單後，由採購單位執行採購下單，再依採購項目選擇到貨倉別。公司倉：由總務代收並核對件數外觀，通知請購人員進行系統驗收，驗收合格後由倉庫管理者建立入庫單，銜接下方出貨或借用流程。客戶倉：由供應商直接出貨至客戶端，不進公司實體倉，經請購人員驗收後由倉庫管理者以客戶倉倉別建立入庫單帳上入庫。廠商倉：暫存於供應商倉庫，經請購人員驗收後由倉庫管理者以廠商倉倉別建立入庫單帳上入庫，待實際出貨需求時再通知供應商出貨。">
+        <defs>
+          <marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
+          </marker>
+        </defs>
+
+        <rect x="20" y="248" width="200" height="64" rx="10" class="node node-input"></rect>
+        <foreignObject x="23" y="251" width="194" height="58"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-hwpm"></span><span class="rdot rdot-projpm"></span> 硬體 PM／專案 PM<br>建立請購單</div></foreignObject>
+        <line x1="220" y1="280" x2="270" y2="280" class="flow-line" marker-end="url(#arrow3)"></line>
+
+        <rect x="270" y="248" width="190" height="64" rx="10" class="node node-core"></rect>
+        <foreignObject x="273" y="251" width="184" height="58"><div class="svg-edit on-core" style="font-size:12px;font-weight:600"><span class="rdot rdot-proc"></span> 採購單位<br>執行採購下單</div></foreignObject>
+        <line x1="460" y1="280" x2="540" y2="280" class="flow-line" marker-end="url(#arrow3)"></line>
+
+        <polygon points="610,210 680,280 610,350 540,280" class="node node-decision"></polygon>
+        <foreignObject x="568" y="258" width="84" height="44"><div class="svg-edit diamond" style="font-size:10.5px">依採購項目<br>選擇到貨倉別？</div></foreignObject>
+
+        <path d="M610,210 L610,110 L760,110" class="flow-line" marker-end="url(#arrow3)"></path>
+        <foreignObject x="630" y="88" width="80" height="16"><div class="svg-edit left yes" style="font-size:10.5px">公司倉</div></foreignObject>
+        <line x1="680" y1="280" x2="760" y2="280" class="flow-line" marker-end="url(#arrow3)"></line>
+        <foreignObject x="685" y="258" width="70" height="16"><div class="svg-edit left" style="font-size:10.5px;color:var(--ink-soft)">客戶倉</div></foreignObject>
+        <path d="M610,350 L610,450 L760,450" class="flow-line" marker-end="url(#arrow3)"></path>
+        <foreignObject x="630" y="458" width="80" height="16"><div class="svg-edit left warn-curve" style="font-size:10.5px">廠商倉</div></foreignObject>
+
+        <rect x="760" y="82" width="170" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="763" y="85" width="164" height="50"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-ga"></span> 總務收貨<br></div></foreignObject>
+        <line x1="930" y1="110" x2="970" y2="110" class="flow-line" marker-end="url(#arrow3)"></line>
+        <rect x="970" y="82" width="170" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="973" y="85" width="164" height="50"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-hwpm"></span><span class="rdot rdot-projpm"></span> 請購人員<br>驗收</div></foreignObject>
+        <line x1="1140" y1="110" x2="1180" y2="110" class="flow-line" marker-end="url(#arrow3)"></line>
+        <rect x="1180" y="82" width="160" height="56" rx="10" class="node node-end"></rect>
+        <foreignObject x="1183" y="85" width="154" height="50"><div class="svg-edit on-end" style="font-size:10px;font-weight:600"><span class="rdot rdot-wh"></span> 倉管建立入庫單<br>→ 銜接出貨/借用流程</div></foreignObject>
+
+        <rect x="760" y="248" width="160" height="64" rx="10" class="node node-plain"></rect>
+        <foreignObject x="763" y="251" width="154" height="58"><div class="svg-edit" style="font-size:12px;font-weight:600">供應商<br>直接出貨至客戶端</div></foreignObject>
+        <line x1="920" y1="280" x2="945" y2="280" class="flow-line" marker-end="url(#arrow3)"></line>
+        <rect x="945" y="252" width="140" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="948" y="255" width="134" height="50"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-hwpm"></span><span class="rdot rdot-projpm"></span> 請購人員<br>驗收</div></foreignObject>
+        <line x1="1085" y1="280" x2="1110" y2="280" class="flow-line" marker-end="url(#arrow3)"></line>
+        <rect x="1110" y="248" width="230" height="64" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="1113" y="251" width="224" height="58"><div class="svg-edit terminal" style="font-size:10.5px"><span><span class="rdot rdot-wh"></span> 倉管以「客戶倉」倉別建立入庫單<br><span style="font-weight:500;font-size:9.5px">帳上入庫，不進公司實體倉</span></span></div></foreignObject>
+
+        <rect x="760" y="422" width="160" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="763" y="425" width="154" height="50"><div class="svg-edit" style="font-size:10.5px;font-weight:600">暫存供應商倉庫<br></div></foreignObject>
+        <line x1="920" y1="450" x2="945" y2="450" class="flow-line" marker-end="url(#arrow3)"></line>
+        <rect x="945" y="422" width="140" height="56" rx="10" class="node node-plain"></rect>
+        <foreignObject x="948" y="425" width="134" height="50"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-hwpm"></span><span class="rdot rdot-projpm"></span> 請購人員<br>驗收</div></foreignObject>
+        <line x1="1085" y1="450" x2="1110" y2="450" class="flow-line" marker-end="url(#arrow3)"></line>
+        <rect x="1110" y="422" width="230" height="56" rx="10" class="node node-terminal"></rect>
+        <foreignObject x="1113" y="425" width="224" height="50"><div class="svg-edit terminal" style="font-size:10.5px"><span><span class="rdot rdot-wh"></span> 倉管以「廠商倉」倉別建立入庫單<br><span style="font-weight:500;font-size:9.5px">帳上入庫；待出貨需求再通知供應商出貨</span></span></div></foreignObject>
+
+      </svg>
+    </div>
+    <figcaption><br></figcaption>
+  </figure>
+</section>
+
+<section id="flow" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Process Map</div>
+    <h2>出貨/借用流程</h2>
+    <p class="section-desc"><br></p>
+    <div class="role-legend"><span><i class="rdot rdot-projpm"></i>專案 PM</span><span><i class="rdot rdot-hwpm"></i>硬體 PM</span><span><i class="rdot rdot-wh"></i>倉庫管理者</span><span><i class="rdot rdot-int"></i>軟硬整合交付處</span><span><i class="rdot rdot-ga"></i>總務</span><span><i class="rdot rdot-neutral"></i>需求人員／保管人（非固定角色卡）</span></div>
+  </div>
+  <figure class="diagram">
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1360 1000" role="img" aria-label="流程圖：上方為出貨需求判斷流程。專案PM向硬體PM提出出貨需求後，由硬體PM評估庫存是否足夠；足夠則由專案PM填寫出貨申請單，經硬體PM核准領貨，軟硬整合交付處安裝並安排貨運出貨，最後由倉管建立出庫單扣減庫存；不足（含無庫存）時由硬體PM詢問Ben是否要備貨；要備貨則由硬體PM回到庫存主案下請購；不備貨則由專案PM於銷售主案下直接開立請購，借用或租用申請遇不備貨則回歸需求單位後續自行請購。下方依申請情境分為庫存借用、資產租用兩條獨立背景線；庫存借用水位不足時，以及資產租用庫存不足或總經理不核准轉資產時，皆以橘色虛線併入硬體PM之是否要備貨判斷；庫存借用完成歸還後，直接進入獨立的歸還結束節點（整合交付處驗收，通知硬體PM歸還登記），不併入主線。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
+          </marker>
+        </defs>
+<rect x="10" y="6" width="1340" height="380" rx="16" class="lane lane-bg"></rect>
+<foreignObject x="32" y="16" width="600" height="20"><div class="svg-edit left lane-bg" style="font-size:13px">庫存出貨｜有客戶·調撥存貨準備出庫（庫存出貨申請單）</div></foreignObject>
+
+<rect x="30" y="125" width="210" height="64" rx="10" class="node node-input"></rect>
+<foreignObject x="33" y="128" width="204" height="58"><div class="svg-edit" style="font-size:12px;font-weight:600"><span class="rdot rdot-projpm"></span><span class="rdot rdot-hwpm"></span> 專案 PM 向硬體 PM<br>確認出貨需求</div></foreignObject>
+<line x1="240" y1="157" x2="268" y2="157" class="flow-line" marker-end="url(#arrow)"></line>
+<polygon points="330,105 392,157 330,209 268,157" class="node node-decision"></polygon>
+<foreignObject x="282" y="133" width="96" height="48"><div class="svg-edit diamond" style="font-size:10.5px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估<br>庫存是否足夠？</div></foreignObject>
+
+<path d="M392,157 L392,125 L480,125" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="410" y="104" width="30" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+<rect x="480" y="95" width="180" height="60" rx="10" class="node node-plain"></rect>
+<foreignObject x="483" y="98" width="174" height="54"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-projpm"></span> 專案 PM 填寫<br>「出貨申請單」申請出貨</div></foreignObject>
+<line x1="660" y1="125" x2="690" y2="125" class="flow-line" marker-end="url(#arrow)"></line>
+<rect x="690" y="95" width="110" height="60" rx="10" class="node node-plain"></rect>
+<foreignObject x="693" y="98" width="104" height="54"><div class="svg-edit" style="font-size:11px;font-weight:600"><span class="rdot rdot-hwpm"></span> 硬體 PM 核准<br>（領貨）</div></foreignObject>
+<line x1="800" y1="125" x2="830" y2="125" class="flow-line" marker-end="url(#arrow)"></line>
+<rect x="830" y="95" width="120" height="60" rx="10" class="node node-plain"></rect>
+<foreignObject x="833" y="98" width="114" height="54"><div class="svg-edit" style="font-size:10.5px;font-weight:600"><span class="rdot rdot-int"></span> 軟硬整合交付處<br>軟硬整合安裝</div></foreignObject>
+<line x1="950" y1="125" x2="980" y2="125" class="flow-line" marker-end="url(#arrow)"></line>
+<rect x="980" y="95" width="120" height="60" rx="10" class="node node-plain"></rect>
+<foreignObject x="983" y="98" width="114" height="54"><div class="svg-edit" style="font-size:10.5px;font-weight:600"><span class="rdot rdot-int"></span> 軟硬整合交付處<br>安排貨運出貨</div></foreignObject>
+<line x1="1100" y1="125" x2="1130" y2="125" class="flow-line" marker-end="url(#arrow)"></line>
+<rect x="1130" y="95" width="210" height="60" rx="10" class="node node-end"></rect>
+<foreignObject x="1133" y="98" width="204" height="54"><div class="svg-edit on-end" style="font-size:10.5px;font-weight:600"><span><span class="rdot rdot-wh"></span> 倉管建立出庫單（扣減庫存）<br><span style="font-weight:400;font-size:9.5px">客戶簽回驗收單後，責任正式移轉</span></span></div></foreignObject>
+
+<path d="M330,209 L330,290 L712,290" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="365" y="293" width="200" height="16"><div class="svg-edit no" style="font-size:11px">否｜庫存不足（含無庫存）</div></foreignObject>
+<polygon points="780,238 848,290 780,342 712,290" class="node node-decision-amber"></polygon>
+<foreignObject x="732" y="272" width="96" height="36"><div class="svg-edit diamond-amber" style="font-size:9.5px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估<br>是否要備貨？<br>（詢問 Ben）</div></foreignObject>
+
+<line x1="848" y1="290" x2="930" y2="290" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="875" y="269" width="30" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+<rect x="930" y="260" width="190" height="60" rx="10" class="node node-core"></rect>
+<foreignObject x="933" y="263" width="184" height="54"><div class="svg-edit on-core" style="font-size:11.5px;font-weight:600"><span><span class="rdot rdot-hwpm"></span> 硬體 PM 請購（回到庫存主案）<br><span style="font-weight:400;font-size:9.5px">備貨入庫後，專案以出貨申請單領貨</span></span></div></foreignObject>
+<line x1="1120" y1="290" x2="1150" y2="290" class="flow-line" marker-end="url(#arrow)"></line>
+<rect x="1150" y="260" width="180" height="60" rx="10" class="node node-terminal"></rect>
+<foreignObject x="1153" y="263" width="174" height="54"><div class="svg-edit terminal" style="font-size:10.5px">銜接｜請購流程<br>（採購→到貨→驗收→入庫）</div></foreignObject>
+
+<path d="M780,238 L780,203 L930,203" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="795" y="182" width="130" height="16"><div class="svg-edit left no" style="font-size:10.5px">否｜不備貨（出貨）</div></foreignObject>
+<path d="M780,220 L700,220" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="706" y="222" width="72" height="14"><div class="svg-edit left no" style="font-size:9.5px">借用／租用</div></foreignObject>
+<rect x="470" y="178" width="230" height="50" rx="10" class="node node-terminal"></rect>
+<foreignObject x="473" y="181" width="224" height="44"><div class="svg-edit terminal" style="font-size:10.5px"><span class="rdot rdot-neutral"></span> 不備貨→回歸需求單位，後續自行請購<br>（借用／租用．本申請結束）</div></foreignObject>
+<rect x="930" y="178" width="190" height="50" rx="10" class="node node-plain"></rect>
+<foreignObject x="933" y="181" width="184" height="44"><div class="svg-edit" style="font-size:11px;font-weight:600"><span><span class="rdot rdot-projpm"></span> 專案 PM 於銷售主案下建立請購單<br><span style="font-weight:400;font-size:9.5px">（直接交付專案，不走出貨申請單）</span></span></div></foreignObject>
+<line x1="1120" y1="203" x2="1150" y2="203" class="flow-line" marker-end="url(#arrow)"></line>
+<rect x="1150" y="178" width="180" height="50" rx="10" class="node node-terminal"></rect>
+<foreignObject x="1153" y="181" width="174" height="44"><div class="svg-edit terminal" style="font-size:9px">銜接｜請購後續<br>（採購→到貨→驗收→入庫）</div></foreignObject>
+
+<rect x="10" y="402" width="1340" height="232" rx="16" class="lane lane-main"></rect>
+<foreignObject x="32" y="410" width="460" height="20"><div class="svg-edit left lane-main" style="font-size:13px">庫存借用｜無客戶．借存貨（庫存借用申請單．需求人員）</div></foreignObject>
+<rect x="34" y="438" width="200" height="62" rx="10" class="node node-plain"></rect>
+<foreignObject x="37" y="441" width="194" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-neutral"></span> 需求人員（保管人）<br>提出「庫存借用」申請</div></foreignObject>
+<polygon points="370,426 427,469 370,512 313,469" class="node node-decision"></polygon>
+<foreignObject x="342" y="451" width="56" height="36"><div class="svg-edit diamond" style="font-size:12px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估是否可以借用？</div></foreignObject>
+<rect x="460" y="438" width="120" height="62" rx="10" class="node node-plain"></rect>
+<foreignObject x="463" y="441" width="114" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-wh"></span> 倉管出借</div></foreignObject>
+<rect x="850" y="438" width="170" height="62" rx="10" class="node node-plain"></rect>
+<foreignObject x="853" y="441" width="164" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-wh"></span> 倉管<br>追蹤歸還</div></foreignObject>
+<line x1="234" y1="469" x2="313" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
+<line x1="427" y1="469" x2="460" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="433" y="450" width="24" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+<line x1="580" y1="469" x2="603" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
+<polygon points="660,426 717,469 660,512 603,469" class="node node-decision"></polygon>
+<foreignObject x="616" y="451" width="88" height="36"><div class="svg-edit diamond" style="font-size:10px">是否為安裝測試<br>用途？</div></foreignObject>
+<line x1="717" y1="469" x2="850" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="735" y="450" width="24" height="18"><div class="svg-edit no" style="font-size:11px">否</div></foreignObject>
+<path d="M660,512 L660,555" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="666" y="518" width="24" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+<rect x="565" y="555" width="190" height="56" rx="10" class="node node-plain"></rect>
+<foreignObject x="568" y="558" width="184" height="50"><div class="svg-edit" style="font-size:10.5px;font-weight:600"><span class="rdot rdot-int"></span> 軟硬整合交付處<br>進行軟硬整合安裝</div></foreignObject>
+<path d="M755,583 L900,583 L900,500" class="flow-line" marker-end="url(#arrow)"></path>
+<line x1="1020" y1="469" x2="1070" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
+<path d="M370,512 L370,526 L14,526 L14,360 L780,360 L780,342" class="exc-line" marker-end="url(#arrow)"></path>
+<foreignObject x="40" y="530" width="320" height="16"><div class="svg-edit left warn-curve" style="font-size:11px">否｜水位不足→併入硬體 PM 備貨判斷</div></foreignObject>
+<rect x="1070" y="438" width="190" height="62" rx="10" class="node node-end"></rect>
+<foreignObject x="1073" y="441" width="184" height="56"><div class="svg-edit on-end" style="font-size:11px"><span class="rdot rdot-int"></span> 結束（整合交付處驗收）<br>通知硬體 PM 已歸還</div></foreignObject>
+
+<rect x="10" y="650" width="1340" height="320" rx="16" class="lane lane-neutral"></rect>
+<foreignObject x="32" y="660" width="520" height="20"><div class="svg-edit left lane-neutral-text" style="font-size:12.5px">資產租用｜無客戶．借資產（設備租用單）</div></foreignObject>
+<rect x="34" y="686" width="200" height="62" rx="10" class="node node-input"></rect>
+<foreignObject x="37" y="689" width="194" height="56"><div class="svg-edit" style="font-size:12.5px;font-weight:600"><span class="rdot rdot-neutral"></span> 需求人員（保管人）<br>提出「資產租用」申請</div></foreignObject>
+<polygon points="370,667 432,717 370,767 308,717" class="node node-decision"></polygon>
+<foreignObject x="338" y="697" width="64" height="40"><div class="svg-edit diamond" style="font-size:11.5px"><span class="rdot rdot-ga"></span> 總務評估是有閒置資產<br>符合規格？</div></foreignObject>
+<polygon points="560,670 614,717 560,764 506,717" class="node node-decision"></polygon>
+<foreignObject x="533" y="699" width="54" height="36"><div class="svg-edit diamond" style="font-size:11.5px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估庫存是否<br>足夠？</div></foreignObject>
+<polygon points="770,659 842,717 770,775 698,717" class="node node-decision"></polygon>
+<foreignObject x="725" y="697" width="90" height="40"><div class="svg-edit diamond" style="font-size:9px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估庫存是否轉資產<br>（須經總經理決策）</div></foreignObject>
+<rect x="900" y="686" width="130" height="62" rx="10" class="node node-plain"></rect>
+<foreignObject x="903" y="689" width="124" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-hwpm"></span> 庫存轉資產</div></foreignObject>
+<rect x="1060" y="686" width="140" height="62" rx="10" class="node node-terminal"></rect>
+<foreignObject x="1063" y="689" width="134" height="56"><div class="svg-edit terminal" style="font-size:11.5px"><span class="rdot rdot-ga"></span> 資產出借<br>（資產規範）</div></foreignObject>
+<rect x="220" y="830" width="300" height="50" rx="10" class="node node-terminal"></rect>
+<foreignObject x="223" y="833" width="294" height="44"><div class="svg-edit terminal" style="font-size:11.5px"><span class="rdot rdot-ga"></span> 資產出借<br>（依資產管理規範辦理，不在本SOP範圍）</div></foreignObject>
+<line x1="234" y1="717" x2="308" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
+<line x1="370" y1="767" x2="370" y2="829" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="386" y="785" width="24" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+<line x1="432" y1="717" x2="506" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="459" y="698" width="24" height="18"><div class="svg-edit no" style="font-size:11px">否</div></foreignObject>
+<line x1="614" y1="717" x2="698" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="646" y="698" width="24" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
+<path d="M560,764 L560,812 L24,812 L24,355 L780,355 L780,342" class="exc-line" marker-end="url(#arrow)"></path>
+<foreignObject x="570" y="790" width="180" height="18"><div class="svg-edit left warn-curve" style="font-size:11px">否｜無庫存可轉→併入硬體 PM 備貨判斷</div></foreignObject>
+<line x1="842" y1="717" x2="900" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
+<foreignObject x="853" y="698" width="40" height="18"><div class="svg-edit yes" style="font-size:11px">核准</div></foreignObject>
+<path d="M770,775 L770,821 L18,821 L18,350 L780,350 L780,342" class="exc-line" marker-end="url(#arrow)"></path>
+<foreignObject x="760" y="790" width="190" height="18"><div class="svg-edit left warn-curve" style="font-size:11px">不核准→併入硬體 PM 備貨判斷</div></foreignObject>
+<line x1="1030" y1="717" x2="1060" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
+
+      </svg>
+    </div>
+    <figcaption><br></figcaption>
+  </figure>
+</section>
+
+<section id="compare" class="wrap">
+  <div class="section-head">
+    <div class="section-kicker">Summary</div>
+    <h2>流程及角色對照總表</h2>
+    <p class="section-desc">八個階段的主責角色、目的、表單與輸出對照；主責欄顏色與角色色一致。</p>
+  </div>
+  <div class="table-scroll">
+    <table class="compare-table2">
+      <thead>
+        <tr>
+          <th style="width:175px">階段</th>
+          <th style="width:190px">主責角色</th>
+          <th style="width:280px">目的／目標</th>
+          <th style="width:170px">相關表單</th>
+          <th style="width:340px">主要事項</th>
+          <th style="width:260px">輸出結果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">1</span>開案</td>
+  <td class="role-cell">庫存主案：<span style="color:var(--role-hwpm)">硬體PM</span><br>銷售主案：<span style="color:var(--amber)">專案PM</span><br>子案：<span style="color:var(--role-int)">軟硬整合交付處</span></td>
+  <td>請購前之開案作業，依「是否已有明確客戶」分流<br><br></td>
+  <td class="form-cell">專案管理系統（ERP)&nbsp;- 庫存主案 / 銷售主案 / 整合交付處子案&nbsp;</td>
+  <td class="fields-cell"><div class="field-line"><b>是否已有明確客戶</b><span>決定開立庫存主案或銷售主案，主責角色見左欄</span></div><div class="field-line"><b>硬體類別</b><span>庫存主案依硬體類別歸類（如GB10）</span></div><div class="field-line"><b>是否需整合交付協助</b><span>影響是否另建子案登記工時</span></div></td>
+  <td class="output-cell">庫存主案→銜接請購流程；銷售主案（庫存足夠）→銜接出貨流程；銷售主案（庫存不足）→ 硬體 PM 詢問 Ben 是否要備貨 → 銜接請購流程（要備貨走庫存主案；不備貨走銷售主案）</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">2</span>請購</td>
+  <td class="role-cell">主責：<span style="color:var(--role-hwpm)">硬體PM</span>／<span style="color:var(--amber)">專案PM</span></td>
+  <td>庫存不足時（開案分流或出貨需求評估時，含無庫存）一律由硬體 PM 詢問 Ben 是否要備貨：要備貨則硬體 PM 回到庫存主案下請購（備貨入庫後，專案以出貨申請單領貨）；不備貨則由專案 PM 於銷售主案下直接開立請購（直接交付專案，不走出貨申請單）；借用／租用申請遇不備貨時，回歸需求單位，後續由需求單位自行請購。</td>
+  <td class="form-cell">採購系統（ERP) - 請購單</td>
+  <td class="fields-cell"><div class="field-line"><b>觸發原因</b><span>需求觸發（備貨庫存／專案需求）</span></div><div class="field-line"><b>目前可用庫存</b><span>判斷當下的庫存數量</span></div><div class="field-line"><b>補貨判斷</b><span>硬體 PM 詢問 Ben 是否要備貨，據以決定請購路徑</span></div><div class="field-line"><b>本次請購數量</b><span>依缺口估算之採購量</span></div></td>
+  <td class="output-cell">常態：出貨需求觸發評估 → 視需要開立請購 → 進入採購</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">3</span>採購</td>
+  <td class="role-cell" style="color:var(--role-proc)">主責：採購單位</td>
+  <td>執行詢價議價與下單，追蹤交期；不自行決定備貨數量。</td>
+  <td class="form-cell">採購系統（ERP) - 採購單</td>
+  <td class="fields-cell"><div class="field-line"><b>品項規格</b><span>對應請購之硬體品項</span></div><div class="field-line"><b>數量</b><span>本次下單數量</span></div><div class="field-line"><b>供應商</b><span>本次下單廠商</span></div><div class="field-line"><b>供應商／料號建檔</b><span>於庫存管理系統建立供應商及料號</span></div><div class="field-line"><b>單價／金額</b><span>採購單價與總金額</span></div><div class="field-line"><b>預計到貨日</b><span>供應商承諾之交期</span></div><div class="field-line"><b>在途狀態</b><span>下單後至到貨前的追蹤進度</span></div></td>
+  <td class="output-cell">下單完成，交期追蹤 → 每週通知總務人員當週預計到貨商品 → 到貨後由總務收貨並通知請購人進行驗收</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">4</span>到貨</td>
+  <td class="role-cell" style="color:var(--warn)">主責：總務</td>
+  <td>到公司倉之採購件，收件人一律為總務；總務代收後通知請購人員進行驗收，本身不涉規格判斷。</td>
+  <td class="form-cell">總務收發文件</td>
+  <td class="fields-cell"><div class="field-line"><b>對應採購單號</b><span>連結來源採購單，確保可追溯</span></div><div class="field-line"><b>實際到貨日期</b><span>總務簽收當日</span></div><div class="field-line"><b>收件人</b><span>公司倉到貨一律由總務代收</span></div><div class="field-line"><b>通知對象</b><span>通知請購人員進行驗收</span></div></td>
+  <td class="output-cell">總務完成收貨簽收 → 通知請購人進行驗收</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">5</span>驗收</td>
+  <td class="role-cell" style="color:var(--ink)">主責：請購人員<br><span style="font-weight:500;font-size:10px;color:var(--muted)">（即該筆請購單原申請人：<span style="color:var(--role-hwpm)">硬體PM</span>或<span style="color:var(--amber)">專案PM</span>）</span></td>
+  <td>核對到貨數量、規格。驗收負責人為請購人員，可協同有技術背景人員驗收，但須本人提交系統驗收單。公司倉、客戶倉、廠商倉皆須經此驗收。</td>
+  <td class="form-cell">採購系統（ERP) - 驗收單</td>
+  <td class="fields-cell"><div class="field-line"><b>對應採購單號</b><span>連結來源採購單，確保可追溯</span></div><div class="field-line"><b>品項規格</b><span>與採購單核對之規格</span></div><div class="field-line"><b>到貨數量</b><span>實際點收之數量</span></div><div class="field-line"><b>驗收結果</b><span>合格／異常</span></div><div class="field-line"><b>驗收負責人</b><span>請購人員本人提交系統驗收單</span></div></td>
+  <td class="output-cell">系統進行驗收 → 倉管進行入庫作業；異常則回報採購單位處理</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">6</span>入庫</td>
+  <td class="role-cell" style="color:var(--role-wh)">主責：倉庫管理者</td>
+  <td>倉管收到驗收單通知後，建立入庫單。客戶倉、廠商倉同樣經請購人驗收後，依倉別建立入庫單（帳上入庫），僅不進公司實體倉。</td>
+  <td class="form-cell">庫存管理系統 - 入庫單</td>
+  <td class="fields-cell"><div class="field-line"><b>對應採購單、驗收單</b><span>連結來源 ERP 採購單、系統驗收單、客戶驗收單</span><span><br></span><span><br></span><span><br></span></div><div class="field-line"><b>品項規格</b><span>入庫品項規格</span></div><div class="field-line"><b>序號</b><span>入庫單填寫硬體原廠序號</span></div><div class="field-line"><b>倉別</b><span>公司倉、客戶倉、廠商倉</span></div><div class="field-line"><b>入庫日期</b><span>依驗收日期入作為入庫日期</span></div><div class="field-line"><b>可用庫存數量</b><span>更新後之正式庫存數字</span></div></td>
+  <td class="output-cell">庫存更新完成，品項成為可用庫存→ 等待出庫申請（借用或出貨）<br>庫存同步更新</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">7</span>出貨申請<span class="stage-sub">（有客戶）</span></td>
+  <td class="role-cell" style="color:var(--amber)">申請人：專案 PM</td>
+  <td>供已有銷售對象之出貨案件申請，權責歸屬專案隸屬處；為永久性出庫，無須歸還。</td>
+  <td class="form-cell">GF 表單 - 庫存出貨申請單<br><a class="form-link" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/1Swm4I1esn9IyCt44eUamodAho0qLhpnJ1RSf20I5aBs/viewform">開啟表單 ↗</a></td>
+  <td class="fields-cell"><div class="field-line"><b>Email／申請人</b><span>聯絡窗口與保管人</span></div><div class="field-line"><b>領取人姓名</b><span>實際領取者</span></div><div class="field-line"><b>專案隸屬處</b><span>責任歸屬單位</span></div><div class="field-line"><b>專案 PM／本案業務</b><span>專案與業務負責人</span></div><div class="field-line"><b>存貨品項名稱</b><span>含規格、數量</span></div><div class="field-line"><b>專案名稱／預計領貨日期</b><span>需與ERP系統一致，含客戶名稱</span></div><div class="field-line"><b>簽核流程（參考）</b><span>依 GF 表單簽核設定逐關審核（申請人檢附資料 → 各級主管／PM 覆核 → 會計作帳，共 12 道關卡），詳細審核人與注意事項另見 GF 表單簽核設定</span></div></td>
+  <td class="output-cell is-amber">需經硬體 PM 核准才能領貨 → 軟硬整合交付處完成軟硬整合安裝 → 安排貨運出貨<br>永久性出庫，無須歸還</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">7</span>借用申請<span class="stage-sub">（無客戶）</span></td>
+  <td class="role-cell" style="color:var(--muted)">申請人：需求人員（保管人）</td>
+  <td>供同仁申請借用存貨作測試或安裝，申請人即為保管人；須經原備貨之硬體 PM 核准，倉管才會出庫。</td>
+  <td class="form-cell">GF 表單 - 庫存借用申請單<br><a class="form-link" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/1oQwGG0Uqkqzel9gtyB1qXmi_AbR-x2jbjbi0VkYCDfg/viewform">開啟表單 ↗</a></td>
+  <td class="fields-cell"><div class="field-line"><b>Email／申請人</b><span>聯絡窗口與保管人</span></div><div class="field-line"><b>領取人姓名</b><span>實際領取者</span></div><div class="field-line"><b>申請人所屬單位</b><span>責任歸屬單位</span></div><div class="field-line"><b>借用品項名稱／數量</b><span>含CPU／GPU／RAM／SSD規格</span></div><div class="field-line"><b>借用用途</b><span>功能測試／安裝作業等</span></div><div class="field-line"><b>預計借用／歸還日期</b><span><br></span></div></td>
+  <td class="output-cell">需經原備貨硬體 PM 核准才能領貨；如屬安裝測試用途，得經軟硬整合交付處進行軟硬整合安裝</td>
+</tr>
+<tr>
+  <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">8</span>出庫</td>
+  <td class="role-cell" style="color:var(--role-wh)">主責：倉庫管理者</td>
+  <td>依已有客戶簽回驗收單之出貨申請單實際同步扣減庫存帳，責任正式移轉。</td>
+  <td class="form-cell">庫存管理系統 - 出庫單</td>
+  <td class="fields-cell"><div class="field-line"><b>對應申請單號</b><span>填入已核准之出貨申請單</span></div><div class="field-line"><b>實際出庫品項與序號</b><span>撿貨當下確認之實際品項</span></div><div class="field-line"><b>出庫日期</b><span>責任移轉生效日</span></div><div class="field-line"><b>客戶驗收單</b><span>責任正式移轉之憑證</span></div></td>
+  <td class="output-cell">庫存同步更新</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="wrap"><br></footer>
+
+<script>
+(function(){
+  var nav = document.querySelector('.topnav');
+  function go(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var navH = nav ? nav.getBoundingClientRect().height : 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+  document.querySelectorAll('.topnav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      go(a.getAttribute('href').slice(1));
+    });
+  });
+  if(location.hash){
+    var id = location.hash.slice(1);
+    window.setTimeout(function(){ go(id); }, 50);
+  }
+})();
+</script>
+
+
+
+
+
+</body></html>
+</body>
+</html>
