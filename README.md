@@ -1,6 +1,10 @@
 # 硬體請採購及庫存作業流程（對外檢視版）
 
-純靜態單頁網站，只有 `index.html` 一個檔案，沒有建置步驟。
+純靜態網站，沒有建置步驟。共三頁：
+
+- `index.html`：硬體請採購及庫存作業流程
+- `shipping.html`：AISO 一體機出貨流程
+- `portal-guide.html`：AISO Portal 使用指南
 
 - 本機預覽：`python3 -m http.server 8080`，然後開 http://localhost:8080
 - 部署：推到 GitHub 的 `main` 分支，GitHub Pages 設定為「Deploy from a branch → main → / (root)」
