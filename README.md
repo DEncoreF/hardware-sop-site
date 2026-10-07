@@ -4,7 +4,7 @@
 
 - `index.html`：硬體請採購及庫存作業流程
 - `shipping.html`：AISO 一體機出貨流程
-- `portal-guide.html`：AISO Portal 使用指南
+- `route-guide.html`：庫存作業路線導覽
 
 - 本機預覽：`python3 -m http.server 8080`，然後開 http://localhost:8080
 - 部署：推到 GitHub 的 `main` 分支，GitHub Pages 設定為「Deploy from a branch → main → / (root)」

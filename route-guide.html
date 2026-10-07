@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>body{margin:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>庫存作業路線導覽</title>
+<meta name="description" content="依角色與情境，回答幾個問題，得到硬體請採購及庫存作業的完整路線。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Layout: left rail = pick role → pick situation; right = live route timeline with inline questions. Palette and type follow the SOP page. */
+  :root{
+    --ink:#1B2A3E; --ink-soft:#48576B; --muted:#79715F;
+    --paper:#F6F3EA; --surface:#FFFFFF; --surface-alt:#EFEAD9;
+    --line:#DAD3C1; --line-soft:#E8E2D2;
+    --teal:#146F62; --teal-strong:#0E5348; --teal-tint:#DCEEE8;
+    --amber:#9C6B2E; --amber-tint:#F3E5CB;
+    --warn:#B15A3C; --warn-tint:#F5E2D8;
+    --ok-bg:#0E5348; --ok-fg:#FFFFFF;
+    --r-sales:#4F6C89; --r-aio:#146F62; --r-hw:#6B5B95; --r-pm:#9C6B2E; --r-wh:#2F7C93;
+    --r-ga:#B15A3C; --r-proc:#5B7A3A; --r-int:#A24E6E; --r-req:#79715F; --r-ext:#48576B;
+    --shadow:0 1px 2px rgba(27,42,62,.06), 0 8px 24px -14px rgba(27,42,62,.18);
+    --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    --f-mono:"IBM Plex Mono","Noto Sans Mono TC",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#ECE7DA; --ink-soft:#B8AF9C; --muted:#A79C87;
+      --paper:#181511; --surface:#221E17; --surface-alt:#2A2419;
+      --line:#3A3327; --line-soft:#2C271D;
+      --teal:#4EBBA6; --teal-strong:#6FD0BC; --teal-tint:#1E3833;
+      --amber:#D6A65D; --amber-tint:#3B2E17;
+      --warn:#DE8E6C; --warn-tint:#3C2820;
+      --ok-bg:#1F5A4E; --ok-fg:#F2EEE1;
+      --r-sales:#8FADCB; --r-aio:#4EBBA6; --r-hw:#B8A8DB; --r-pm:#D6A65D; --r-wh:#6FC2D6;
+      --r-ga:#DE8E6C; --r-proc:#A8CB80; --r-int:#E29DBB; --r-req:#A79C87; --r-ext:#B8AF9C;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -14px rgba(0,0,0,.5);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#ECE7DA; --ink-soft:#B8AF9C; --muted:#A79C87;
+    --paper:#181511; --surface:#221E17; --surface-alt:#2A2419;
+    --line:#3A3327; --line-soft:#2C271D;
+    --teal:#4EBBA6; --teal-strong:#6FD0BC; --teal-tint:#1E3833;
+    --amber:#D6A65D; --amber-tint:#3B2E17;
+    --warn:#DE8E6C; --warn-tint:#3C2820;
+    --ok-bg:#1F5A4E; --ok-fg:#F2EEE1;
+    --r-sales:#8FADCB; --r-aio:#4EBBA6; --r-hw:#B8A8DB; --r-pm:#D6A65D; --r-wh:#6FC2D6;
+    --r-ga:#DE8E6C; --r-proc:#A8CB80; --r-int:#E29DBB; --r-req:#A79C87; --r-ext:#B8AF9C;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -14px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--paper); color:var(--ink); font-family:var(--f-body); -webkit-font-smoothing:antialiased; line-height:1.5}
+  button{font:inherit; color:inherit}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+  .shell{max-width:1240px; margin:0 auto; padding-inline:24px; padding-block:28px 56px}
+  header.top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 24px; margin-bottom:24px}
+  .kicker{font-family:var(--f-mono); font-size:11.5px; font-weight:600; letter-spacing:.1em; color:var(--teal); text-transform:uppercase}
+  h1{margin:4px 0 0; font-size:clamp(22px,3vw,28px); font-weight:700; text-wrap:balance}
+  .top-meta{font-size:12.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center}
+  .top-meta a{color:var(--teal-strong); text-decoration:none; border-bottom:1px solid currentColor}
+
+  .layout{display:grid; grid-template-columns:330px minmax(0,1fr); gap:24px; align-items:start}
+  @media (max-width:860px){ .layout{grid-template-columns:1fr} }
+
+  /* ---- left rail ---- */
+  .rail{display:flex; flex-direction:column; gap:20px; position:sticky; top:calc(env(safe-area-inset-top,0px) + 16px)}
+  @media (max-width:860px){ .rail{display:contents} .rail > section{order:1} #panel{order:2} .rail > .gaps{order:3} }
+  .roles .role-btn:last-child:nth-child(odd){grid-column:1 / -1}
+  .step-h{display:flex; align-items:baseline; gap:8px; font-size:13px; font-weight:700; color:var(--ink); margin-bottom:10px}
+  .step-h .n{font-family:var(--f-mono); font-size:11px; color:var(--muted); font-weight:600}
+  .group-l{font-size:11px; color:var(--muted); font-weight:600; letter-spacing:.06em; margin:2px 0 6px}
+  .roles{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px}
+  .role-btn{
+    display:flex; flex-direction:column; gap:1px; text-align:left; cursor:pointer;
+    background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:8px 10px 8px 12px;
+    position:relative; min-width:0;
+  }
+  .role-btn::before{content:""; position:absolute; left:0; top:8px; bottom:8px; width:3px; border-radius:0 3px 3px 0; background:var(--rc)}
+  .role-btn b{font-size:13px; font-weight:700}
+  .role-btn span{font-size:11px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .role-btn:hover{border-color:var(--rc)}
+  .role-btn[aria-pressed="true"]{border-color:var(--rc); box-shadow:inset 0 0 0 1px var(--rc); background:color-mix(in srgb, var(--rc) 9%, var(--surface))}
+
+  .scens{display:flex; flex-direction:column; gap:6px}
+  .scen-btn{
+    text-align:left; cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:9px;
+    padding:9px 12px; display:flex; flex-direction:column; gap:2px;
+  }
+  .scen-btn b{font-size:13px; font-weight:600}
+  .scen-btn span{font-size:11.5px; color:var(--muted)}
+  .scen-btn:hover{border-color:var(--teal)}
+  .scen-btn[aria-pressed="true"]{border-color:var(--teal); box-shadow:inset 0 0 0 1px var(--teal); background:var(--teal-tint)}
+
+  .gaps{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .gaps ol{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px}
+  .gaps li{font-size:12px; color:var(--ink-soft); display:grid; grid-template-columns:28px minmax(0,1fr); gap:4px}
+  .gaps li code{font-family:var(--f-mono); font-size:11px; font-weight:600; color:var(--warn)}
+
+  /* ---- route panel ---- */
+  .panel{background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); min-width:0}
+  .panel-head{padding:18px 22px 16px; border-bottom:1px solid var(--line-soft); display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px 16px; align-items:flex-start}
+  .panel-head h2{margin:0; font-size:18px; font-weight:700; text-wrap:balance}
+  .panel-head .who{font-size:12px; color:var(--muted); margin-bottom:2px}
+  .who i{display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--rc); margin-right:6px; vertical-align:1px}
+  .ghost{cursor:pointer; background:transparent; border:1px solid var(--line); border-radius:8px; padding:6px 11px; font-size:12px; color:var(--ink-soft)}
+  .ghost:hover{border-color:var(--ink-soft)}
+  .ghost:disabled{opacity:.45; cursor:default}
+
+  .summary{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-bottom:1px solid var(--line-soft)}
+  .sum{padding:12px 22px; display:flex; flex-direction:column; gap:2px; min-width:0}
+  .sum + .sum{border-left:1px solid var(--line-soft)}
+  .sum .v{font-family:var(--f-mono); font-size:20px; font-weight:600; font-variant-numeric:tabular-nums}
+  .sum .l{font-size:11.5px; color:var(--muted)}
+  .sum.warn .v{color:var(--warn)}
+  .sum.state .v{font-family:var(--f-body); font-size:14px; font-weight:700; padding-top:5px}
+  .sum.state.done .v{color:var(--teal-strong)}
+  .sum.state.wait .v{color:var(--amber)}
+  @media (max-width:520px){ .sum{padding:10px 14px} .sum .v{font-size:17px} }
+
+  .route{list-style:none; margin:0; padding:20px 22px 24px; display:flex; flex-direction:column}
+  .it{display:grid; grid-template-columns:112px 18px minmax(0,1fr); column-gap:10px; position:relative}
+  .it .who-c{font-size:11.5px; font-weight:700; color:var(--rc); text-align:right; padding-top:9px; line-height:1.35}
+  .it .rail-c{position:relative}
+  .it .rail-c::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--line)}
+  .it:first-child .rail-c::before{top:14px}
+  .it.last .rail-c::before{bottom:calc(100% - 14px)}
+  .it .dot{position:absolute; left:3px; top:9px; width:12px; height:12px; border-radius:50%; background:var(--surface); border:2.5px solid var(--rc)}
+  .it.mine .dot{background:var(--rc)}
+  .it .body{padding:6px 0 14px; min-width:0}
+  @media (max-width:560px){
+    .it{grid-template-columns:18px minmax(0,1fr)}
+    .it .who-c{grid-column:2; text-align:left; padding-top:2px; order:-1}
+    .it .rail-c{grid-row:1 / span 2; grid-column:1}
+    .it .body{grid-column:2; padding-top:2px}
+  }
+
+  .txt{font-size:14px; color:var(--ink)}
+  .mine .card{background:color-mix(in srgb, var(--rc) 10%, var(--surface)); border:1px solid color-mix(in srgb, var(--rc) 45%, var(--line)); border-radius:9px; padding:8px 12px}
+  .you{display:inline-block; font-family:var(--f-mono); font-size:10.5px; font-weight:600; color:var(--surface); background:var(--rc); border-radius:4px; padding:0 5px; margin-right:6px; vertical-align:1px}
+  .meta{display:flex; flex-wrap:wrap; gap:5px 8px; margin-top:5px}
+  .form{font-size:11.5px; color:var(--ink-soft); background:var(--surface-alt); border:1px solid var(--line); border-radius:5px; padding:1px 7px}
+  .note{font-size:12px; color:var(--muted)}
+  .jump{cursor:pointer; background:none; border:none; padding:0; font-size:12px; font-weight:600; color:var(--teal-strong); border-bottom:1px solid currentColor}
+
+  .q{border:1.5px solid var(--teal); border-radius:11px; padding:12px 14px; background:var(--surface)}
+  .q.w{border-style:dashed; border-color:var(--rc)}
+  .q-l{font-family:var(--f-mono); font-size:10.5px; font-weight:600; letter-spacing:.08em; color:var(--teal-strong); text-transform:uppercase}
+  .q.w .q-l{color:var(--rc)}
+  .q-t{font-size:15px; font-weight:700; margin:3px 0 4px}
+  .q-h{font-size:12px; color:var(--muted); margin-bottom:10px}
+  .opts{display:flex; flex-wrap:wrap; gap:8px}
+  .opt{cursor:pointer; border:1px solid var(--teal); color:var(--teal-strong); background:var(--teal-tint); border-radius:8px; padding:7px 14px; font-size:13px; font-weight:600}
+  .opt:hover{background:var(--teal); color:var(--surface)}
+  .q.w .opt{border-color:var(--rc); color:var(--ink); background:color-mix(in srgb, var(--rc) 10%, var(--surface))}
+  .q.w .opt:hover{background:var(--rc); color:var(--surface)}
+
+  .ans{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; font-size:13px}
+  .ans .k{color:var(--ink-soft)}
+  .ans .a{font-weight:700; color:var(--teal-strong)}
+  .ans.w .a{color:var(--ink)}
+  .ans .tag{font-family:var(--f-mono); font-size:10.5px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:0 5px}
+  .chg{cursor:pointer; background:none; border:none; padding:0; font-size:12px; color:var(--muted); border-bottom:1px dotted currentColor}
+
+  .gap{background:var(--warn-tint); border:1px solid color-mix(in srgb, var(--warn) 45%, transparent); border-radius:9px; padding:8px 12px; font-size:13px; color:var(--ink)}
+  .gap b{color:var(--warn); font-family:var(--f-mono); font-size:11.5px; margin-right:6px}
+  .milestone{font-family:var(--f-mono); font-size:11px; font-weight:600; letter-spacing:.06em; color:var(--muted); padding-top:9px}
+
+  .end{background:var(--ok-bg); color:var(--ok-fg); border-radius:10px; padding:10px 14px; font-size:14px; font-weight:600; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center}
+  .end.stop{background:var(--surface-alt); color:var(--ink); border:1px solid var(--line)}
+  .end .jump{color:inherit}
+
+  .todo{border-top:1px solid var(--line-soft); padding:16px 22px 20px}
+  .todo h3{margin:0 0 8px; font-size:13px; font-weight:700}
+  .todo ol{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--ink-soft)}
+  .todo .forms{margin-top:10px; display:flex; flex-wrap:wrap; gap:6px}
+  .empty{padding:28px 22px; color:var(--muted); font-size:13px}
+
+  @media (prefers-reduced-motion: no-preference){
+    .it.fresh .body{animation:rise .22s ease-out}
+    @keyframes rise{from{transform:translateY(4px); opacity:.4} to{transform:none; opacity:1}}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div>
+      <div class="kicker">Route Finder</div>
+      <h1>庫存作業路線導覽</h1>
+    </div>
+    <div class="top-meta">
+      <span>依據：硬體請採購及庫存作業流程（2026.10 版）</span>
+      <a href="index.html">開啟完整 SOP</a>
+      <a href="shipping.html">AISO 一體機出貨流程</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="rail">
+      <section>
+        <div class="step-h"><span class="n">01</span>你的角色</div>
+        <div class="group-l">流程發起</div>
+        <div class="roles" id="roles-a"></div>
+        <div class="group-l" style="margin-top:10px">協作與執行</div>
+        <div class="roles" id="roles-b"></div>
+      </section>
+      <section>
+        <div class="step-h"><span class="n">02</span>你要處理的情境</div>
+        <div class="scens" id="scens"></div>
+      </section>
+      <section class="gaps">
+        <div class="step-h" style="margin-bottom:8px">SOP 待確認事項</div>
+        <ol id="gaplist"></ol>
+      </section>
+    </aside>
+
+    <main class="panel" id="panel" aria-live="polite"></main>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ---------- reference data ---------- */
+  const ROLES = {
+    pm:   {name:'專案 PM', sub:'銷售主案與出貨申請', c:'--r-pm', g:'a'},
+    hw:   {name:'硬體 PM', sub:'庫存主案與備貨統籌', c:'--r-hw', g:'a'},
+    req:  {name:'需求人員', sub:'保管人・借用／租用', c:'--r-req', g:'a'},
+    sales:{name:'業務', sub:'商機開發', c:'--r-sales', g:'a'},
+    aio:  {name:'一體機 PM', sub:'方案孵化', c:'--r-aio', g:'a'},
+    wh:   {name:'倉庫管理者', sub:'入庫・出庫執行', c:'--r-wh', g:'b'},
+    ga:   {name:'總務', sub:'到貨收發・資產管理', c:'--r-ga', g:'b'},
+    proc: {name:'採購單位', sub:'詢價下單・交期', c:'--r-proc', g:'b'},
+    int:  {name:'軟硬整合交付處', sub:'安裝・子案・歸還驗收', c:'--r-int', g:'b'}
+  };
+  const EXT = {
+    ben:{name:'Ben', c:'--r-ext'}, gm:{name:'總經理', c:'--r-ext'},
+    sup:{name:'供應商', c:'--r-ext'}, item:{name:'採購項目', c:'--r-ext'}
+  };
+  const GAPS = {
+    G1:'銷售路徑 3（不備貨、直接交付專案）驗收後，是否仍需建立入庫單？',
+    G2:'借用／租用遇「要備貨」，貨入庫後原申請自動接續，還是需重新申請？',
+    G3:'庫存借用出借時，倉管是否建立出庫單？',
+    G4:'總經理不核准轉資產、回到 Ben 判斷後，若決定備貨，該筆租用申請如何處理？',
+    G5:'客戶倉／廠商倉到貨（不經總務），由誰通知請購人驗收？'
+  };
+  const F = {
+    caseSys:'專案管理系統（ERP）', pr:'ERP 請購單', po:'ERP 採購單', recv:'ERP 驗收單',
+    inb:'庫存管理系統 入庫單', outb:'庫存管理系統 出庫單', gfShip:'GF 庫存出貨申請單',
+    gfBorrow:'GF 庫存借用申請單', rent:'設備租用單', gaDoc:'總務收發文件'
+  };
+
+  /* ---------- node builders ---------- */
+  let seq = 0;
+  const S = (role, text, o={}) => ({t:'step', role, text, ...o});
+  const Q = (text, opts, hint) => ({t:'q', id:'n'+(++seq), text, hint, opts:opts.map(([label,items])=>({label,items}))});
+  const W = (who, text, opts) => ({t:'w', id:'n'+(++seq), who, text, opts:opts.map(([label,items])=>({label,items}))});
+  const GAP = id => ({t:'gap', id});
+  const MS = text => ({t:'ms', text});
+  const END = (text, o={}) => ({t:'end', text, ...o});
+  const ask = (who, viewer, text, opts) => who === viewer ? Q(text, opts) : W(who, text, opts);
+
+  /* ---------- shared sub-routes ---------- */
+  const path1 = () => [
+    MS('銷售路徑 1／2 共用：出貨申請'),
+    S('pm','填寫「庫存出貨申請單」申請出貨',{form:F.gfShip}),
+    S('hw','審核出貨申請，核准後才能領貨',{note:'GF 表單逐關簽核，軟硬整合交付處亦為關卡之一'}),
+    S('int','軟硬整合安裝'),
+    S('int','安排貨運出貨'),
+    S('wh','客戶簽回驗收單後，建立出庫單、扣減庫存',{form:F.outb}),
+    END('出貨完成，責任正式移轉（永久性出庫，無須歸還）')
+  ];
+  const recvByWarehouse = (req, viewer) => ask(
+    req===viewer ? viewer : 'item', viewer,
+    req===viewer ? '這批貨送到哪個倉別？' : '到貨倉別（依採購項目而定）',
+    [
+      ['公司倉',[S('ga','代收到貨並簽收，通知請購人驗收',{form:F.gaDoc}), S(req,'驗收：核對數量與規格，本人提交系統驗收單',{form:F.recv}), S('wh','依驗收單建立入庫單（實體入庫）',{form:F.inb})]],
+      ['客戶倉',[S('sup','供應商直接出貨至客戶端'), GAP('G5'), S(req,'驗收：核對數量與規格，本人提交系統驗收單',{form:F.recv}), S('wh','以「客戶倉」倉別建立入庫單（帳上入庫，不進公司實體倉）',{form:F.inb})]],
+      ['廠商倉',[S('sup','暫存於供應商倉庫'), GAP('G5'), S(req,'驗收：核對數量與規格，本人提交系統驗收單',{form:F.recv}), S('wh','以「廠商倉」倉別建立入庫單（帳上入庫）',{form:F.inb,note:'待實際出貨需求時，再由採購單位通知供應商出貨'})]]
+    ]);
+  const stockProcure = viewer => [
+    S('hw','於庫存主案下建立請購單',{form:F.pr}),
+    S('proc','詢價議價、下單，追蹤交期',{form:F.po}),
+    recvByWarehouse('hw', viewer)
+  ];
+  const stockProcureShort = () => S('hw','於庫存主案下請購備貨：採購 → 到貨 → 硬體 PM 驗收 → 倉管入庫',{jump:['hw','b1']});
+  const benStop = () => END('申請結束：回歸需求單位，後續自行請購',{stop:true});
+  const benBorrow = () => W('ben','是否要備貨？（由硬體 PM 詢問 Ben）',[
+    ['要備貨',[stockProcureShort(), GAP('G2'), END('待確認：貨入庫後此申請如何接續',{stop:true})]],
+    ['不備貨',[benStop()]]
+  ]);
+  const borrowOut = () => [
+    S('wh','依已核准之借用申請單出借'),
+    GAP('G3'),
+    Q('這次借用是安裝測試用途嗎？',[
+      ['是',[S('int','進行軟硬整合安裝')]],
+      ['否',[]]
+    ],'申請單的「借用用途」欄位會註明'),
+    S('wh','追蹤歸還'),
+    S('req','到期歸還借用品'),
+    S('int','驗收歸還品'),
+    S('int','通知硬體 PM 完成歸還登記'),
+    END('借用結束')
+  ];
+  const rentAfterNoAsset = viewer => [
+    ask('hw', viewer, '現有庫存足夠嗎？', [
+      ['足夠',[
+        W('gm','是否核准庫存轉資產？',[
+          ['核准',[S('hw','辦理庫存轉資產'), END('資產出借（依資產管理規範辦理，不在本 SOP 範圍）')]],
+          ['不核准',[GAP('G4'), benBorrow()]]
+        ])
+      ]],
+      ['不足',[benBorrow()]]
+    ])
+  ];
+
+  /* ---------- scenarios ---------- */
+  const SC = {
+    sales:[
+      {id:'d1', title:'有商機或需求要提出', desc:'登錄後，依是否有明確客戶交棒', build:()=>[
+        S('sales','登錄商機與需求'),
+        Q('已經有明確客戶了嗎？',[
+          ['有',[END('交由專案 PM 建立「銷售主案」',{jump:['pm','a1']})]],
+          ['沒有，目的為備貨',[END('交由硬體 PM 評估備貨',{jump:['hw','b1']})]]
+        ])
+      ]}
+    ],
+    aio:[
+      {id:'e1', title:'方案孵化完成，需要準備硬體', desc:'確認軟硬體組合後交棒', build:()=>[
+        S('aio','確認方案所需的軟硬體組合',{note:'一體機 PM 不直接請購，也不決定備貨量'}),
+        END('交棒硬體 PM 統籌備貨與請購',{jump:['hw','b1']})
+      ]}
+    ],
+    pm:[
+      {id:'a1', title:'有客戶，要取得硬體交付專案', desc:'銷售主案 → 出貨申請或請購（擇一）', build:()=>[
+        Q('銷售主案已經建立了嗎？',[
+          ['已建立',[]],
+          ['還沒',[S('pm','建立「銷售主案」（獨立開案，不得掛在庫存主案之下）',{form:F.caseSys})]]
+        ]),
+        Q('需要軟硬整合交付處協助交付嗎？',[
+          ['需要',[S('int','於銷售主案下建立子案，紀錄工時',{form:F.caseSys})]],
+          ['不需要',[]]
+        ]),
+        S('pm','向硬體 PM 提出出貨需求'),
+        W('hw','現有庫存足夠嗎？',[
+          ['足夠',[MS('銷售路徑 1'), ...path1()]],
+          ['不足（含無庫存）',[
+            W('ben','是否要備貨？（由硬體 PM 詢問 Ben）',[
+              ['要備貨',[MS('銷售路徑 2'), stockProcureShort(), ...path1()]],
+              ['不備貨',[MS('銷售路徑 3'),
+                S('pm','於銷售主案下建立請購單',{form:F.pr}),
+                S('proc','詢價議價、下單，追蹤交期',{form:F.po}),
+                S('pm','到貨後驗收，本人提交系統驗收單',{form:F.recv}),
+                GAP('G1'),
+                END('直接交付專案（不走出貨申請單）')
+              ]]
+            ])
+          ]]
+        ])
+      ]},
+      {id:'a2', title:'我請購的貨到了，要驗收', desc:'銷售路徑 3 自行請購的到貨', build:()=>[
+        recvByWarehouse('pm','pm'),
+        END('驗收完成，品項入帳')
+      ]}
+    ],
+    hw:[
+      {id:'b1', title:'無客戶，要備貨', desc:'庫存主案 → 請購 → 入庫', build:()=>[
+        Q('這個硬體類別已經有庫存主案了嗎？',[
+          ['有，沿用',[S('hw','沿用既有庫存主案')]],
+          ['沒有',[S('hw','依硬體類別建立「庫存主案」（如 GB10）',{form:F.caseSys})]]
+        ]),
+        ...stockProcure('hw'),
+        END('品項成為可用庫存，等待出貨／借用申請')
+      ]},
+      {id:'b2', title:'收到專案 PM 的出貨需求', desc:'判斷庫存、必要時詢問 Ben', build:()=>[
+        Q('現有庫存足夠嗎？',[
+          ['足夠',[MS('銷售路徑 1'), ...path1()]],
+          ['不足（含無庫存）',[
+            S('hw','詢問 Ben 是否要備貨'),
+            W('ben','Ben 的決定',[
+              ['要備貨',[MS('銷售路徑 2'), ...stockProcure('hw'), ...path1()]],
+              ['不備貨',[MS('銷售路徑 3'), S('hw','通知專案 PM 於銷售主案下自行請購'), END('交由專案 PM 自行請購（不走出貨申請單）',{jump:['pm','a1']})]]
+            ])
+          ]]
+        ])
+      ]},
+      {id:'b3', title:'收到庫存借用申請', desc:'評估水位、核准出借', build:()=>[
+        Q('可以借用嗎（庫存水位足夠）？',[
+          ['可以',[S('hw','核准借用申請'), ...borrowOut()]],
+          ['水位不足',[S('hw','詢問 Ben 是否要備貨'), benBorrow()]]
+        ])
+      ]},
+      {id:'b4', title:'收到資產租用（總務無閒置資產）', desc:'評估庫存、轉資產需總經理核准', build:()=>[
+        S('ga','已評估：無符合規格的閒置資產，轉請硬體 PM 評估'),
+        ...rentAfterNoAsset('hw')
+      ]},
+      {id:'b5', title:'我請購的貨到了，要驗收', desc:'庫存主案請購的到貨', build:()=>[
+        recvByWarehouse('hw','hw'),
+        END('品項成為可用庫存')
+      ]}
+    ],
+    req:[
+      {id:'c1', title:'借存貨（庫存借用）', desc:'測試或安裝用，需歸還', build:()=>[
+        S('req','填寫「庫存借用申請單」（申請人即保管人）',{form:F.gfBorrow}),
+        W('hw','可以借用嗎（庫存水位足夠）？',[
+          ['可以',[S('hw','核准借用申請'), ...borrowOut()]],
+          ['水位不足',[benBorrow()]]
+        ])
+      ]},
+      {id:'c2', title:'借資產（資產租用）', desc:'先找閒置資產，再評估庫存', build:()=>[
+        S('req','填寫「設備租用單」',{form:F.rent}),
+        W('ga','有符合規格的閒置資產嗎？',[
+          ['有',[END('資產出借（依資產管理規範辦理，不在本 SOP 範圍）')]],
+          ['沒有',rentAfterNoAsset('req')]
+        ])
+      ]},
+      {id:'c3', title:'歸還借用品', desc:'交整合交付處驗收', build:()=>[
+        S('req','歸還借用品'),
+        S('int','驗收歸還品'),
+        S('int','通知硬體 PM 完成歸還登記'),
+        END('借用結束')
+      ]}
+    ],
+    wh:[
+      {id:'f1', title:'收到驗收單', desc:'依倉別建立入庫單', build:()=>[
+        Q('驗收單上的倉別是？',[
+          ['公司倉',[S('wh','建立入庫單（實體入庫，填寫原廠序號）',{form:F.inb})]],
+          ['客戶倉',[S('wh','以「客戶倉」倉別建立入庫單（帳上入庫，不進公司實體倉）',{form:F.inb})]],
+          ['廠商倉',[S('wh','以「廠商倉」倉別建立入庫單（帳上入庫）',{form:F.inb,note:'待實際出貨需求時，再由採購單位通知供應商出貨'})]]
+        ]),
+        END('庫存更新，品項成為可用庫存')
+      ]},
+      {id:'f2', title:'收到已核准的出貨申請', desc:'客戶簽回驗收單後出庫', build:()=>[
+        Q('客戶驗收單簽回了嗎？',[
+          ['已簽回',[S('wh','依已核准之出貨申請單撿貨，建立出庫單、扣減庫存',{form:F.outb}), END('責任正式移轉')]],
+          ['尚未',[END('先等待，責任尚未移轉',{stop:true})]]
+        ])
+      ]},
+      {id:'f3', title:'收到已核准的借用申請', desc:'出借並追蹤歸還', build:()=>[
+        S('wh','依已核准之借用申請單出借'),
+        GAP('G3'),
+        S('wh','追蹤歸還'),
+        END('歸還時交軟硬整合交付處驗收',{jump:['int','i5']})
+      ]},
+      {id:'f4', title:'借用品歸還', desc:'轉交驗收', build:()=>[
+        S('wh','收到歸還品，交軟硬整合交付處驗收'),
+        END('由軟硬整合交付處驗收',{jump:['int','i5']})
+      ]}
+    ],
+    ga:[
+      {id:'g1', title:'公司倉到貨', desc:'代收並通知請購人', build:()=>[
+        S('ga','代收到貨並簽收',{form:F.gaDoc}),
+        Q('這筆採購是誰請購的？',[
+          ['硬體 PM',[S('ga','通知硬體 PM 驗收'), END('交由硬體 PM 驗收',{jump:['hw','b5']})]],
+          ['專案 PM',[S('ga','通知專案 PM 驗收'), END('交由專案 PM 驗收',{jump:['pm','a2']})]]
+        ],'依採購單號追溯原請購人')
+      ]},
+      {id:'g2', title:'收到資產租用申請', desc:'評估閒置資產', build:()=>[
+        Q('有符合規格的閒置資產嗎？',[
+          ['有',[S('ga','資產出借'), END('依資產管理規範辦理（不在本 SOP 範圍）')]],
+          ['沒有',[S('ga','轉請硬體 PM 評估庫存'), END('交由硬體 PM 評估',{jump:['hw','b4']})]]
+        ])
+      ]}
+    ],
+    proc:[
+      {id:'h1', title:'收到請購單', desc:'下單、追蹤交期、到貨通知', build:()=>[
+        S('proc','詢價議價、下單',{form:F.po}),
+        S('proc','追蹤交期'),
+        Q('採購項目的到貨倉別是？',[
+          ['公司倉',[S('proc','每週通知總務當週預計到貨'), END('到貨後由總務收貨',{jump:['ga','g1']})]],
+          ['客戶倉',[S('sup','供應商直接出貨至客戶端'), GAP('G5'), END('請購人驗收後，倉管帳上入庫',{jump:['wh','f1']})]],
+          ['廠商倉',[S('sup','暫存於供應商倉庫'), GAP('G5'), S('proc','待實際出貨需求時，通知供應商出貨'), END('請購人驗收後，倉管帳上入庫',{jump:['wh','f1']})]]
+        ])
+      ]}
+    ],
+    int:[
+      {id:'i1', title:'銷售主案需要整合交付', desc:'建立子案、紀錄工時', build:()=>[
+        S('int','於銷售主案下建立子案，紀錄工時',{form:F.caseSys}),
+        END('依銷售主案執行後續作業')
+      ]},
+      {id:'i2', title:'出貨申請單送來簽核', desc:'GF 表單關卡之一', build:()=>[
+        S('int','簽核出貨申請單',{form:F.gfShip}),
+        END('其餘關卡依 GF 表單簽核設定')
+      ]},
+      {id:'i3', title:'出貨申請已核准', desc:'安裝、安排貨運', build:()=>[
+        S('int','軟硬整合安裝'),
+        S('int','安排貨運出貨'),
+        S('wh','客戶簽回驗收單後，建立出庫單',{form:F.outb}),
+        END('責任正式移轉')
+      ]},
+      {id:'i4', title:'借用（安裝測試用途）', desc:'安裝後交倉管追蹤', build:()=>[
+        S('int','進行軟硬整合安裝'),
+        S('wh','追蹤歸還'),
+        END('歸還時由你驗收',{jump:['int','i5']})
+      ]},
+      {id:'i5', title:'借用品歸還', desc:'驗收並通知硬體 PM', build:()=>[
+        S('int','驗收歸還品'),
+        S('int','通知硬體 PM 完成歸還登記'),
+        END('借用結束')
+      ]}
+    ]
+  };
+  // build every scenario once so node ids stay stable
+  Object.values(SC).forEach(list => list.forEach(s => { s.items = s.build(); }));
+
+  /* ---------- state ---------- */
+  const st = {role:'pm', scen:'a1', answers:{}, fresh:null};
+  const scenOf = () => SC[st.role].find(s => s.id === st.scen) || SC[st.role][0];
+
+  function walk(list, out){
+    for (const it of list){
+      if (it.t === 'q' || it.t === 'w'){
+        const a = st.answers[it.id];
+        out.push({...it, chosen:a});
+        if (a == null) return 'stop';
+        const r = walk(it.opts[a].items, out);
+        if (r !== 'cont') return r;
+      } else if (it.t === 'end'){
+        out.push(it); return 'end';
+      } else out.push(it);
+    }
+    return 'cont';
+  }
+
+  /* ---------- render ---------- */
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const actor = k => ROLES[k] || EXT[k];
+  const colorOf = k => `var(${actor(k).c})`;
+
+  function renderRail(){
+    ['a','b'].forEach(g => {
+      $('#roles-'+g).innerHTML = Object.entries(ROLES).filter(([,r]) => r.g === g).map(([k,r]) =>
+        `<button class="role-btn" type="button" data-role="${k}" style="--rc:var(${r.c})" aria-pressed="${k===st.role}">
+           <b>${esc(r.name)}</b><span>${esc(r.sub)}</span></button>`).join('');
+    });
+    $('#scens').innerHTML = SC[st.role].map(s =>
+      `<button class="scen-btn" type="button" data-scen="${s.id}" aria-pressed="${s.id===st.scen}">
+         <b>${esc(s.title)}</b><span>${esc(s.desc)}</span></button>`).join('');
+    $('#gaplist').innerHTML = Object.entries(GAPS).map(([k,v]) => `<li><code>${k}</code><span>${esc(v)}</span></li>`).join('');
+  }
+
+  function renderPanel(){
+    const sc = scenOf(), me = ROLES[st.role];
+    const out = []; const status = walk(sc.items, out);
+    const mineSteps = out.filter(i => i.t === 'step' && i.role === st.role);
+    const gaps = out.filter(i => i.t === 'gap');
+    const forms = [...new Set(mineSteps.filter(s => s.form).map(s => s.form))];
+    const pending = out.find(i => (i.t==='q'||i.t==='w') && i.chosen == null);
+    const stateTxt = status==='stop' ? (pending && pending.t==='w' ? '等待他人判斷' : '等你回答') : '路線完整';
+    const stateCls = status==='stop' ? 'wait' : 'done';
+
+    const rows = out.map((it, idx) => {
+      const last = idx === out.length - 1 ? ' last' : '';
+      const fresh = st.fresh && it.id === st.fresh ? ' fresh' : '';
+      if (it.t === 'step'){
+        const mine = it.role === st.role;
+        const a = actor(it.role);
+        return `<li class="it${mine?' mine':''}${last}" style="--rc:${colorOf(it.role)}">
+          <div class="who-c">${esc(a.name)}</div><div class="rail-c"><span class="dot"></span></div>
+          <div class="body"><div class="${mine?'card':''}"><div class="txt">${mine?'<span class="you">你</span>':''}${esc(it.text)}</div>
+          ${(it.form||it.note||it.jump) ? `<div class="meta">${it.form?`<span class="form">${esc(it.form)}</span>`:''}${it.note?`<span class="note">${esc(it.note)}</span>`:''}${it.jump?jumpBtn(it.jump,'看完整步驟'):''}</div>`:''}
+          </div></div></li>`;
+      }
+      if (it.t === 'q' || it.t === 'w'){
+        const isW = it.t === 'w';
+        const who = isW ? it.who : st.role;
+        const a = actor(who);
+        if (it.chosen == null){
+          const label = isW ? `由 ${a.name} 判斷` : '你需要確認';
+          const hint = isW ? '這一步不是你決定的。選一個可能結果，預覽後續路線。' : (it.hint || '');
+          return `<li class="it${last}${fresh}" style="--rc:${colorOf(who)}">
+            <div class="who-c">${esc(a.name)}</div><div class="rail-c"><span class="dot"></span></div>
+            <div class="body"><div class="q${isW?' w':''}"><div class="q-l">${esc(label)}</div><div class="q-t">${esc(it.text)}</div>
+            ${hint?`<div class="q-h">${esc(hint)}</div>`:''}
+            <div class="opts">${it.opts.map((o,i) => `<button class="opt" type="button" data-node="${it.id}" data-opt="${i}">${esc(o.label)}</button>`).join('')}</div>
+            </div></div></li>`;
+        }
+        return `<li class="it${last}${fresh}" style="--rc:${colorOf(who)}">
+          <div class="who-c">${esc(a.name)}</div><div class="rail-c"><span class="dot"></span></div>
+          <div class="body"><div class="ans${isW?' w':''}"><span class="k">${esc(it.text)}</span><span class="a">→ ${esc(it.opts[it.chosen].label)}</span>
+          ${isW?'<span class="tag">預覽</span>':''}<button class="chg" type="button" data-reset="${it.id}">${isW?'換一個結果':'修改'}</button></div></div></li>`;
+      }
+      if (it.t === 'gap'){
+        return `<li class="it${last}" style="--rc:var(--warn)"><div class="who-c">待確認</div><div class="rail-c"><span class="dot"></span></div>
+          <div class="body"><div class="gap"><b>${it.id}</b>${esc(GAPS[it.id])}</div></div></li>`;
+      }
+      if (it.t === 'ms'){
+        return `<li class="it${last}" style="--rc:var(--line)"><div class="who-c"></div><div class="rail-c"></div><div class="body"><div class="milestone">${esc(it.text)}</div></div></li>`;
+      }
+      if (it.t === 'end'){
+        return `<li class="it last" style="--rc:${it.stop?'var(--muted)':'var(--teal)'}"><div class="who-c">${it.stop?'結束':'完成'}</div><div class="rail-c"><span class="dot"></span></div>
+          <div class="body"><div class="end${it.stop?' stop':''}"><span>${esc(it.text)}</span>${it.jump?jumpBtn(it.jump,'接著看 '+ROLES[it.jump[0]].name+' 的路線 →'):''}</div></div></li>`;
+      }
+      return '';
+    }).join('');
+
+    $('#panel').innerHTML = `
+      <div class="panel-head" style="--rc:var(${me.c})">
+        <div><div class="who"><i></i>${esc(me.name)}</div><h2>${esc(sc.title)}</h2></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="ghost" type="button" id="undo" ${Object.keys(st.answers).length?'':'disabled'}>上一步</button>
+          <button class="ghost" type="button" id="reset">重新開始</button>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="sum"><span class="v">${mineSteps.length}</span><span class="l">你要做的事</span></div>
+        <div class="sum${gaps.length?' warn':''}"><span class="v">${gaps.length}</span><span class="l">待確認處</span></div>
+        <div class="sum state ${stateCls}"><span class="v">${stateTxt}</span><span class="l">路線狀態</span></div>
+      </div>
+      <ol class="route">${rows}</ol>
+      ${status!=='stop' && mineSteps.length ? `<div class="todo"><h3>你在這條路線的待辦</h3><ol>${mineSteps.map(s=>`<li>${esc(s.text)}</li>`).join('')}</ol>
+        ${forms.length?`<div class="forms">${forms.map(f=>`<span class="form">${esc(f)}</span>`).join('')}</div>`:''}</div>` : ''}
+    `;
+    st.fresh = null;
+  }
+  const jumpBtn = ([r,s], label) => `<button class="jump" type="button" data-jump="${r}-${s}">${esc(label)}</button>`;
+
+  function syncHash(){ try { history.replaceState(null,'','#'+st.role+'-'+st.scen); } catch(e){} }
+  function go(role, scen){
+    st.role = role; st.scen = scen || SC[role][0].id; st.answers = {}; st.order = [];
+    syncHash(); renderRail(); renderPanel();
+  }
+  st.order = [];
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.role){ go(b.dataset.role); return; }
+    if (b.dataset.scen){ go(st.role, b.dataset.scen); return; }
+    if (b.dataset.jump){ const [r,s] = b.dataset.jump.split('-'); go(r,s); document.getElementById('panel').scrollIntoView({behavior:'smooth', block:'start'}); return; }
+    if (b.dataset.node){
+      st.answers[b.dataset.node] = +b.dataset.opt; st.order.push(b.dataset.node);
+      const out=[]; walk(scenOf().items,out); const nx = out.find(i=>(i.t==='q'||i.t==='w')&&i.chosen==null); st.fresh = nx && nx.id;
+      renderPanel(); return;
+    }
+    if (b.dataset.reset){ delete st.answers[b.dataset.reset]; st.order = st.order.filter(x => x !== b.dataset.reset); st.fresh = b.dataset.reset; renderPanel(); return; }
+    if (b.id === 'undo'){ const last = st.order.pop(); if (last) delete st.answers[last]; renderPanel(); return; }
+    if (b.id === 'reset'){ st.answers = {}; st.order = []; renderPanel(); return; }
+  });
+
+  const m = /^#([a-z]+)-([a-z0-9]+)$/.exec(location.hash || '');
+  if (m && SC[m[1]] && SC[m[1]].some(s => s.id === m[2])){ st.role = m[1]; st.scen = m[2]; }
+  renderRail(); renderPanel();
+})();
+</script>
+</body>
+</html>
