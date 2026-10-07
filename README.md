@@ -3,7 +3,7 @@
 純靜態網站，沒有建置步驟。共三頁：
 
 - `index.html`：硬體請採購及庫存作業流程
-- `shipping.html`：AISO 一體機出貨流程
+- `shipping.html`：AISO 一體機出貨與借用流程
 - `route-guide.html`：庫存作業路線導覽
 
 - 本機預覽：`python3 -m http.server 8080`，然後開 http://localhost:8080
