@@ -466,8 +466,8 @@
       <div class="role-name">業務</div>
       <div class="role-sub" style="color:var(--slate)">商機開發</div>
       <div class="role-desc">登錄商機與需求，案子尚未成立，尚無請購或庫存行為。</div>
-      <div class="role-tag" style="background:var(--slate-tint); color:var(--slate)">涉入：商機與需求登錄</div>
-      <div class="role-note">案子尚未成立前的最上游角色，需求會作為後續請購量之參考基礎。</div>
+      <div class="role-tag" style="background:var(--slate-tint); color:var(--slate)">涉入：商機與需求登錄・客戶倉到貨通知</div>
+      <div class="role-note">案子尚未成立前的最上游角色，需求會作為後續請購量之參考基礎；供應商直送客戶端（客戶倉）時，由業務通知請購人驗收。</div>
     </div>
     <div class="role-card">
       <div class="role-badge" style="border-color:var(--teal); color:var(--teal)"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.6" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><line x1="12" y1="16" x2="12" y2="19" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="8" y1="19" x2="16" y2="19" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><circle cx="12" cy="7.3" r="0.55" fill="currentColor" stroke="none"></circle></svg></div>
@@ -482,7 +482,7 @@
       <div class="role-name">硬體 PM</div>
       <div class="role-sub" style="color:var(--role-hwpm)">庫存主案與備貨統籌</div>
       <div class="role-desc">依硬體類別建立／沿用「庫存主案」，統籌備貨數量請購，並核准後續出售、借用、出貨。</div>
-      <div class="role-tag" style="background:var(--role-hwpm-tint); color:var(--role-hwpm)">涉入：開案（庫存主案）・請購・驗收（庫存備貨）・出貨／借用核准</div>
+      <div class="role-tag" style="background:var(--role-hwpm-tint); color:var(--role-hwpm)">涉入：開案（庫存主案）・請購・驗收（庫存備貨）・出貨／借用核准・庫存轉資產評估</div>
       <div class="role-note">庫存去留的最終決策者；出貨／借用遇庫存不足時，會先詢問 Ben 是否要備貨再定案。</div>
     </div>
     <div class="role-card">
@@ -497,8 +497,8 @@
       <div class="role-badge" style="border-color:var(--role-wh); color:var(--role-wh)"><svg width="20" height="20" viewBox="0 0 24 24"><polyline points="4,11 12,5 20,11" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline><rect x="6" y="11" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect><rect x="10.5" y="15" width="3" height="4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></rect></svg></div>
       <div class="role-name">倉庫管理者</div>
       <div class="role-sub" style="color:var(--role-wh)">實體庫存執行</div>
-      <div class="role-desc">依驗收單建立入庫單；依已核准之出貨／借用申請單實際撿貨出庫。</div>
-      <div class="role-tag" style="background:var(--role-wh-tint); color:var(--role-wh)">涉入：入庫・出庫（僅執行，不做核准判斷）</div>
+      <div class="role-desc">依驗收單建立入庫單；依已核准之出貨申請單撿貨出庫；借用則建立調撥單，將貨物管理狀態移至專案倉。</div>
+      <div class="role-tag" style="background:var(--role-wh-tint); color:var(--role-wh)">涉入：入庫・出庫・調撥（僅執行，不做核准判斷）</div>
       <div class="role-note">提供庫存數字（帳上庫存），出庫與否仍需依申請單上的核准角色放行。</div>
     </div>
     <div class="role-card">
@@ -507,7 +507,7 @@
       <div class="role-sub" style="color:var(--warn)">到貨收發／資產管理</div>
       <div class="role-desc">代收公司倉到貨，並通知請購人員驗收；評估是否有閒置資產可以出借。</div>
       <div class="role-tag" style="background:var(--warn-tint); color:var(--warn)">涉入：到貨代收・資產租用評估</div>
-      <div class="role-note">不涉及規格判斷；資產租用不足或不核准轉資產時，會併回庫存補貨判斷。</div>
+      <div class="role-note">不涉及規格判斷；無可出借資產時，由硬體 PM 評估可否庫存轉資產，皆不適用則改走資產請購（不在本 SOP 範圍）。</div>
     </div>
     <div class="role-card">
       <div class="role-badge" style="border-color:var(--role-proc); color:var(--role-proc)"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="9" cy="19" r="1.4" stroke="currentColor" stroke-width="1.7" fill="none"></circle><circle cx="17" cy="19" r="1.4" stroke="currentColor" stroke-width="1.7" fill="none"></circle><path d="M4,5 L6,5 L8.4,16 L18,16 L20,8 L7,8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
@@ -538,7 +538,7 @@
   </div>
   <figure class="diagram">
     <div class="diagram-frame">
-      <svg viewBox="0 0 1360 910" role="img" aria-label="全流程總覽泳道圖：橫列為七個角色（專案PM、硬體PM、軟硬整合交付處、倉庫管理者、總務、採購單位、需求人員），直欄為五個執行階段（開案、請購、採購到入庫、出貨借用申請、出庫）。開案階段：無客戶時硬體PM建立或沿用庫存主案，有客戶時專案PM建立銷售主案，需整合交付時由整合交付處建立子案。請購階段：硬體PM於庫存主案下建立庫存請購；庫存不足時硬體PM詢問Ben是否要備貨，要備貨則硬體PM請購，不備貨則專案PM於銷售主案下建立請購單。採購到入庫階段：採購單位下單，公司倉由總務收貨、請購人員驗收、倉管建立入庫單；客戶倉或廠商倉由供應商直送或暫存，不進實體倉，同樣經請購人驗收後由倉管依倉別建立入庫單。出貨借用申請階段：專案PM提出出貨需求由硬體PM評估庫存是否足夠；需求人員提出庫存借用或資產租用申請，租用先由總務評估閒置資產，無則由硬體PM評估庫存。出庫階段：專案PM填寫出貨申請單後由整合交付處安裝並安排貨運；借用由倉管出借並追蹤歸還，整合交付處驗收歸還並通知硬體PM；資產依資產管理規範出借。">
+      <svg viewBox="0 0 1360 910" role="img" aria-label="全流程總覽泳道圖：橫列為七個角色（專案PM、硬體PM、軟硬整合交付處、倉庫管理者、總務、採購單位、需求人員），直欄為五個執行階段（開案、請購、採購到入庫、出貨借用申請、出庫）。開案階段：無客戶時硬體PM建立或沿用庫存主案，有客戶時專案PM建立銷售主案，需整合交付時由整合交付處建立子案。請購階段：硬體PM於庫存主案下建立庫存請購；庫存不足時硬體PM詢問Ben是否要備貨，要備貨則硬體PM請購，不備貨則專案PM於銷售主案下建立請購單。採購到入庫階段：採購單位下單，公司倉由總務收貨、請購人員驗收、倉管建立入庫單；客戶倉或廠商倉由供應商直送或暫存，不進實體倉，同樣經請購人驗收後由倉管依倉別建立入庫單。出貨借用申請階段：專案PM提出出貨需求由硬體PM評估庫存是否足夠；需求人員提出庫存借用或資產租用申請；租用先由總務評估閒置資產，無則由硬體PM評估可否庫存轉資產（總經理核准），皆不適用改走資產請購。出庫階段：專案PM填寫出貨申請單後由整合交付處安裝並安排貨運；借用由倉管建立調撥單出借並追蹤歸還，整合交付處驗收歸還並通知硬體PM；資產依資產管理規範出借。">
         <defs>
           <marker id="arrowO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
@@ -606,8 +606,8 @@
         <rect x="1140" y="190" width="110" height="56" rx="10" class="node node-plain"></rect>
         <foreignObject x="1143" y="193" width="104" height="50"><div class="svg-edit" style="font-size:10px;font-weight:600">審核<br>出貨申請（領貨）</div></foreignObject>
         <rect x="1140" y="303" width="110" height="54" rx="10" class="node node-plain"></rect>
-        <foreignObject x="1143" y="306" width="104" height="48"><div class="svg-edit" style="font-size:9.5px;font-weight:600">庫存轉資產<br>（租用・總經理核准）</div></foreignObject>
-        <foreignObject x="1142" y="360" width="90" height="14"><div class="svg-edit left muted" style="font-size:8.5px">不核准→回備貨判斷</div></foreignObject>
+        <foreignObject x="1143" y="306" width="104" height="48"><div class="svg-edit" style="font-size:9.5px;font-weight:600">可否庫存轉資產<br>（總經理核准）</div></foreignObject>
+        <foreignObject x="1241" y="362" width="106" height="14"><div class="svg-edit left muted" style="font-size:8.5px">否→資產請購（範圍外）</div></foreignObject>
         <polygon points="1055,184 1100,218 1055,252 1010,218" class="node node-decision"></polygon>
         <foreignObject x="1013" y="204" width="84" height="28"><div class="svg-edit diamond" style="font-size:9.5px">評估<br>庫存足夠？</div></foreignObject>
         <polygon points="560,296 610,330 560,364 510,330" class="node node-decision-amber"></polygon>
@@ -617,7 +617,7 @@
 
         <!-- ===== L3 需求人員 ===== -->
         <rect x="405" y="816" width="210" height="54" rx="10" class="node node-terminal"></rect>
-        <foreignObject x="408" y="819" width="204" height="48"><div class="svg-edit terminal" style="font-size:10px">回歸需求單位，後續自行請購<br>（借用／租用．本申請結束）</div></foreignObject>
+        <foreignObject x="408" y="819" width="204" height="48"><div class="svg-edit terminal" style="font-size:10px">回歸需求單位，後續自行請購<br>（庫存借用．本申請結束）</div></foreignObject>
         <rect x="960" y="852" width="135" height="40" rx="10" class="node node-plain"></rect>
         <foreignObject x="963" y="854" width="129" height="36"><div class="svg-edit" style="font-size:10px;font-weight:600">需求人員（保管人）<br>提出「庫存借用」申請</div></foreignObject>
         <rect x="960" y="800" width="135" height="40" rx="10" class="node node-plain"></rect>
@@ -625,9 +625,9 @@
 
         <!-- ===== L4 倉庫管理者 ===== -->
         <rect x="790" y="508" width="76" height="54" rx="10" class="node node-end"></rect>
-        <foreignObject x="792" y="511" width="72" height="48"><div class="svg-edit on-end" style="font-size:9.5px;font-weight:600"><span>建立入庫單<br><span style="font-size:8.5px">（供出貨／借用）</span></span></div></foreignObject>
+        <foreignObject x="792" y="511" width="72" height="48"><div class="svg-edit on-end" style="font-size:9.5px;font-weight:600"><span>建立入庫單<br><span style="font-size:8.5px">驗收後一律建立</span></span></div></foreignObject>
         <rect x="1120" y="508" width="65" height="54" rx="10" class="node node-plain"></rect>
-        <foreignObject x="1123" y="511" width="59" height="48"><div class="svg-edit" style="font-size:10.5px;font-weight:600">出借<br>追蹤歸還</div></foreignObject>
+        <foreignObject x="1123" y="511" width="59" height="48"><div class="svg-edit" style="font-size:10px;font-weight:600">調撥出借<br>追蹤歸還</div></foreignObject>
         <rect x="1252" y="508" width="78" height="54" rx="10" class="node node-end"></rect>
         <foreignObject x="1255" y="511" width="72" height="48"><div class="svg-edit on-end" style="font-size:9px;font-weight:600">建立出庫單<br>（扣減庫存）</div></foreignObject>
 
@@ -680,7 +680,7 @@
         <path d="M560,296 L560,140" class="sc-sale" marker-end="url(#arrowO)"></path>
         <foreignObject x="455" y="146" width="100" height="14"><div class="svg-edit no" style="font-size:10px;justify-content:flex-end;text-align:right">否｜不備貨（出貨）</div></foreignObject>
         <path d="M560,364 L560,816" class="sc-borrow" marker-end="url(#arrowO)"></path>
-        <foreignObject x="405" y="372" width="150" height="14"><div class="svg-edit no" style="font-size:9.5px;justify-content:flex-end;text-align:right">否｜不備貨（借用／租用）</div></foreignObject>
+        <foreignObject x="405" y="372" width="150" height="14"><div class="svg-edit no" style="font-size:9.5px;justify-content:flex-end;text-align:right">否｜不備貨（借用）</div></foreignObject>
         <path d="M510,330 L462,330 L462,246" class="sc-stock" marker-end="url(#arrowO)"></path>
         <foreignObject x="468" y="262" width="60" height="14"><div class="svg-edit left yes" style="font-size:10px">是｜要備貨</div></foreignObject>
 
@@ -692,7 +692,7 @@
         <path d="M740,635 L752,635 L752,258 L812,258 L812,246" class="sc-stock" marker-end="url(#arrowO)"></path>
         <path d="M840,246 L840,508" class="sc-stock" marker-end="url(#arrowO)"></path>
         <path d="M772,708 L772,258" class="sc-stock"></path>
-        <foreignObject x="777" y="612" width="60" height="26"><div class="svg-edit left muted" style="font-size:9px">經請購人員驗收</div></foreignObject>
+        <foreignObject x="777" y="594" width="90" height="44"><div class="svg-edit left muted" style="font-size:9px">經請購人員驗收<br>客戶倉：業務通知<br>廠商倉：自行掌握</div></foreignObject>
 
         <!-- ===== edges: 出貨需求 → 庫存判斷 ===== -->
         <line x1="1055" y1="140" x2="1055" y2="184" class="sc-sale" marker-end="url(#arrowO)"></line>
@@ -709,20 +709,19 @@
 
         <!-- ===== edges: 借用／租用 ===== -->
         <path d="M960,872 L882,872 L882,330 L895,330" class="sc-borrow" marker-end="url(#arrowO)"></path>
-        <path d="M1010,635 L882,635" class="sc-rent"></path>
-        <foreignObject x="890" y="620" width="118" height="14"><div class="svg-edit left no" style="font-size:9.5px">否｜無閒置資產</div></foreignObject>
+        <path d="M1058,603 L1058,372 L1100,372 A8,8 0 0 1 1116,372 L1124,372 L1124,330 L1140,330" class="sc-rent" marker-end="url(#arrowO)"></path>
+        <foreignObject x="1063" y="572" width="44" height="26"><div class="svg-edit left no" style="font-size:9px">否｜無可<br>出借資產</div></foreignObject>
         <line x1="1058" y1="800" x2="1058" y2="667" class="sc-rent" marker-end="url(#arrowO)"></line>
         <line x1="1106" y1="635" x2="1160" y2="635" class="sc-rent" marker-end="url(#arrowO)"></line>
         <foreignObject x="1116" y="618" width="40" height="14"><div class="svg-edit yes" style="font-size:10px">是</div></foreignObject>
         <path d="M985,330 L1108,330 L1108,535 L1120,535" class="sc-borrow" marker-end="url(#arrowO)"></path>
-        <path d="M1108,330 L1140,330" class="sc-rent" marker-end="url(#arrowO)"></path>
         <path d="M1235,357 L1235,608" class="sc-rent" marker-end="url(#arrowO)"></path>
-        <foreignObject x="992" y="314" width="118" height="14"><div class="svg-edit left yes" style="font-size:10px">是｜可借用／調撥</div></foreignObject>
-        <foreignObject x="992" y="334" width="120" height="14"><div class="svg-edit left muted" style="font-size:9px">庫存借用→出借；資產租用→轉資產</div></foreignObject>
+        <foreignObject x="992" y="314" width="112" height="14"><div class="svg-edit left yes" style="font-size:10px">是｜可借用</div></foreignObject>
+        <foreignObject x="992" y="334" width="112" height="14"><div class="svg-edit left muted" style="font-size:9px">倉管建立調撥單出借</div></foreignObject>
         <path d="M1148,508 L1148,462" class="sc-borrow" marker-end="url(#arrowO)"></path>
       </svg>
     </div>
-    <figcaption>庫存不足一律由硬體 PM 詢問 Ben 是否要備貨：要備貨→硬體 PM 於庫存主案請購；不備貨→出貨由專案 PM 於銷售主案請購（不走出貨申請單），庫存借用／資產租用回歸需求單位自行請購。驗收由請購人本人執行。</figcaption>
+    <figcaption>庫存不足一律由硬體 PM 詢問 Ben 是否要備貨：要備貨→硬體 PM 於庫存主案請購；不備貨→出貨由專案 PM 於銷售主案請購（不走出貨申請單），庫存借用回歸需求單位自行請購；借用遇要備貨時申請停留，貨入庫後接續。驗收由請購人本人執行，驗收後一律建立入庫單。資產租用無可出借資產時評估庫存轉資產，皆不適用改走資產請購（不在本 SOP 範圍）。</figcaption>
   </figure>
 </section>
 
@@ -886,6 +885,7 @@
           <span class="step is-pm"><i class="rdot rdot-projpm"></i>專案 PM 於銷售主案下請購</span><span class="step-arrow">→</span>
           <span class="step is-muted">採購 → 到貨</span><span class="step-arrow">→</span>
           <span class="step is-pm"><i class="rdot rdot-projpm"></i>專案 PM 驗收</span><span class="step-arrow">→</span>
+          <span class="step"><i class="rdot rdot-wh"></i>倉管 建立入庫單</span><span class="step-arrow">→</span>
           <span class="step is-end">直接交付專案</span>
         </div>
         <div class="path-pm">專案 PM：<b>只請購（並驗收）</b>　<span class="no">不走出貨申請單</span></div>
@@ -921,7 +921,7 @@
   </div>
   <figure class="diagram">
     <div class="diagram-frame">
-      <svg viewBox="0 0 1360 560" role="img" aria-label="請購採購流程圖：硬體PM或專案PM建立已核准之請購單後，由採購單位執行採購下單，再依採購項目選擇到貨倉別。公司倉：由總務代收並核對件數外觀，通知請購人員進行系統驗收，驗收合格後由倉庫管理者建立入庫單，銜接下方出貨或借用流程。客戶倉：由供應商直接出貨至客戶端，不進公司實體倉，經請購人員驗收後由倉庫管理者以客戶倉倉別建立入庫單帳上入庫。廠商倉：暫存於供應商倉庫，經請購人員驗收後由倉庫管理者以廠商倉倉別建立入庫單帳上入庫，待實際出貨需求時再通知供應商出貨。">
+      <svg viewBox="0 0 1360 560" role="img" aria-label="請購採購流程圖：硬體PM或專案PM建立已核准之請購單後，由採購單位執行採購下單，再依採購項目選擇到貨倉別。公司倉：由總務代收並核對件數外觀，通知請購人員進行系統驗收，驗收合格後由倉庫管理者建立入庫單，銜接下方出貨或借用流程。客戶倉：由供應商直接出貨至客戶端，不進公司實體倉，由業務通知請購人員驗收後由倉庫管理者以客戶倉倉別建立入庫單帳上入庫。廠商倉：暫存於供應商倉庫，請購人員自行掌握到貨並驗收後由倉庫管理者以廠商倉倉別建立入庫單帳上入庫，待實際出貨需求時再通知供應商出貨。">
         <defs>
           <marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
@@ -956,7 +956,7 @@
         <foreignObject x="1183" y="85" width="154" height="50"><div class="svg-edit on-end" style="font-size:10px;font-weight:600"><span class="rdot rdot-wh"></span> 倉管建立入庫單<br>→ 銜接出貨/借用流程</div></foreignObject>
 
         <rect x="760" y="248" width="160" height="64" rx="10" class="node node-plain"></rect>
-        <foreignObject x="763" y="251" width="154" height="58"><div class="svg-edit" style="font-size:12px;font-weight:600">供應商<br>直接出貨至客戶端</div></foreignObject>
+        <foreignObject x="763" y="251" width="154" height="58"><div class="svg-edit" style="font-size:12px;font-weight:600"><span>供應商<br>直接出貨至客戶端<br><span style="font-weight:500;font-size:10px;color:var(--muted)">由業務通知請購人</span></span></div></foreignObject>
         <line x1="920" y1="280" x2="945" y2="280" class="flow-line" marker-end="url(#arrow3)"></line>
         <rect x="945" y="252" width="140" height="56" rx="10" class="node node-plain"></rect>
         <foreignObject x="948" y="255" width="134" height="50"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-hwpm"></span><span class="rdot rdot-projpm"></span> 請購人員<br>驗收</div></foreignObject>
@@ -965,7 +965,7 @@
         <foreignObject x="1113" y="251" width="224" height="58"><div class="svg-edit terminal" style="font-size:10.5px"><span><span class="rdot rdot-wh"></span> 倉管以「客戶倉」倉別建立入庫單<br><span style="font-weight:500;font-size:9.5px">帳上入庫，不進公司實體倉</span></span></div></foreignObject>
 
         <rect x="760" y="422" width="160" height="56" rx="10" class="node node-plain"></rect>
-        <foreignObject x="763" y="425" width="154" height="50"><div class="svg-edit" style="font-size:10.5px;font-weight:600">暫存供應商倉庫<br></div></foreignObject>
+        <foreignObject x="763" y="425" width="154" height="50"><div class="svg-edit" style="font-size:10.5px;font-weight:600"><span>暫存供應商倉庫<br><span style="font-weight:500;font-size:9.5px;color:var(--muted)">請購人自行掌握到貨</span></span></div></foreignObject>
         <line x1="920" y1="450" x2="945" y2="450" class="flow-line" marker-end="url(#arrow3)"></line>
         <rect x="945" y="422" width="140" height="56" rx="10" class="node node-plain"></rect>
         <foreignObject x="948" y="425" width="134" height="50"><div class="svg-edit" style="font-size:11.5px;font-weight:600"><span class="rdot rdot-hwpm"></span><span class="rdot rdot-projpm"></span> 請購人員<br>驗收</div></foreignObject>
@@ -988,7 +988,7 @@
   </div>
   <figure class="diagram">
     <div class="diagram-frame">
-      <svg viewBox="0 0 1360 1000" role="img" aria-label="流程圖：上方為出貨需求判斷流程。專案PM向硬體PM提出出貨需求後，由硬體PM評估庫存是否足夠；足夠則由專案PM填寫出貨申請單，經硬體PM核准領貨，軟硬整合交付處安裝並安排貨運出貨，最後由倉管建立出庫單扣減庫存；不足（含無庫存）時由硬體PM詢問Ben是否要備貨；要備貨則由硬體PM回到庫存主案下請購；不備貨則由專案PM於銷售主案下直接開立請購，借用或租用申請遇不備貨則回歸需求單位後續自行請購。下方依申請情境分為庫存借用、資產租用兩條獨立背景線；庫存借用水位不足時，以及資產租用庫存不足或總經理不核准轉資產時，皆以橘色虛線併入硬體PM之是否要備貨判斷；庫存借用完成歸還後，直接進入獨立的歸還結束節點（整合交付處驗收，通知硬體PM歸還登記），不併入主線。">
+      <svg viewBox="0 0 1360 1000" role="img" aria-label="流程圖：上方為出貨需求判斷流程。專案PM向硬體PM提出出貨需求後，由硬體PM評估庫存是否足夠；足夠則由專案PM填寫出貨申請單，經硬體PM核准領貨，軟硬整合交付處安裝並安排貨運出貨，最後由倉管建立出庫單扣減庫存；不足（含無庫存）時由硬體PM詢問Ben是否要備貨；要備貨則由硬體PM回到庫存主案下請購；不備貨則由專案PM於銷售主案下直接開立請購，庫存借用申請遇不備貨則回歸需求單位後續自行請購，遇要備貨則申請停留、貨入庫後接續。下方依申請情境分為庫存借用、資產租用兩條獨立背景線；庫存借用水位不足時，以橘色虛線併入硬體PM之是否要備貨判斷，倉管出借時建立調撥單將貨物移至專案倉；資產租用無閒置資產時由硬體PM評估可否庫存轉資產並經總經理核准，庫存不足或不核准則改走資產請購（不在本SOP範圍）；庫存借用完成歸還後，直接進入獨立的歸還結束節點（整合交付處驗收，通知硬體PM歸還登記），不併入主線。">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"></path>
@@ -1028,7 +1028,7 @@
 <line x1="848" y1="290" x2="930" y2="290" class="flow-line" marker-end="url(#arrow)"></line>
 <foreignObject x="875" y="269" width="30" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
 <rect x="930" y="260" width="190" height="60" rx="10" class="node node-core"></rect>
-<foreignObject x="933" y="263" width="184" height="54"><div class="svg-edit on-core" style="font-size:11.5px;font-weight:600"><span><span class="rdot rdot-hwpm"></span> 硬體 PM 請購（回到庫存主案）<br><span style="font-weight:400;font-size:9.5px">備貨入庫後，專案以出貨申請單領貨</span></span></div></foreignObject>
+<foreignObject x="933" y="263" width="184" height="54"><div class="svg-edit on-core" style="font-size:11.5px;font-weight:600"><span><span class="rdot rdot-hwpm"></span> 硬體 PM 請購（回到庫存主案）<br><span style="font-weight:400;font-size:9.5px">入庫後，出貨申請／借用申請接續</span></span></div></foreignObject>
 <line x1="1120" y1="290" x2="1150" y2="290" class="flow-line" marker-end="url(#arrow)"></line>
 <rect x="1150" y="260" width="180" height="60" rx="10" class="node node-terminal"></rect>
 <foreignObject x="1153" y="263" width="174" height="54"><div class="svg-edit terminal" style="font-size:10.5px">銜接｜請購流程<br>（採購→到貨→驗收→入庫）</div></foreignObject>
@@ -1036,9 +1036,9 @@
 <path d="M780,238 L780,203 L930,203" class="flow-line" marker-end="url(#arrow)"></path>
 <foreignObject x="795" y="182" width="130" height="16"><div class="svg-edit left no" style="font-size:10.5px">否｜不備貨（出貨）</div></foreignObject>
 <path d="M780,220 L700,220" class="flow-line" marker-end="url(#arrow)"></path>
-<foreignObject x="706" y="222" width="72" height="14"><div class="svg-edit left no" style="font-size:9.5px">借用／租用</div></foreignObject>
+<foreignObject x="706" y="222" width="72" height="14"><div class="svg-edit left no" style="font-size:9.5px">借用</div></foreignObject>
 <rect x="470" y="178" width="230" height="50" rx="10" class="node node-terminal"></rect>
-<foreignObject x="473" y="181" width="224" height="44"><div class="svg-edit terminal" style="font-size:10.5px"><span class="rdot rdot-neutral"></span> 不備貨→回歸需求單位，後續自行請購<br>（借用／租用．本申請結束）</div></foreignObject>
+<foreignObject x="473" y="181" width="224" height="44"><div class="svg-edit terminal" style="font-size:10.5px"><span class="rdot rdot-neutral"></span> 不備貨→回歸需求單位，後續自行請購<br>（庫存借用．本申請結束）</div></foreignObject>
 <rect x="930" y="178" width="190" height="50" rx="10" class="node node-plain"></rect>
 <foreignObject x="933" y="181" width="184" height="44"><div class="svg-edit" style="font-size:11px;font-weight:600"><span><span class="rdot rdot-projpm"></span> 專案 PM 於銷售主案下建立請購單<br><span style="font-weight:400;font-size:9.5px">（直接交付專案，不走出貨申請單）</span></span></div></foreignObject>
 <line x1="1120" y1="203" x2="1150" y2="203" class="flow-line" marker-end="url(#arrow)"></line>
@@ -1052,7 +1052,7 @@
 <polygon points="370,426 427,469 370,512 313,469" class="node node-decision"></polygon>
 <foreignObject x="342" y="451" width="56" height="36"><div class="svg-edit diamond" style="font-size:12px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估是否可以借用？</div></foreignObject>
 <rect x="460" y="438" width="120" height="62" rx="10" class="node node-plain"></rect>
-<foreignObject x="463" y="441" width="114" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-wh"></span> 倉管出借</div></foreignObject>
+<foreignObject x="463" y="441" width="114" height="56"><div class="svg-edit" style="font-size:12px;font-weight:600"><span><span class="rdot rdot-wh"></span> 倉管出借<br><span style="font-weight:500;font-size:10px">建立調撥單・移至專案倉</span></span></div></foreignObject>
 <rect x="850" y="438" width="170" height="62" rx="10" class="node node-plain"></rect>
 <foreignObject x="853" y="441" width="164" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-wh"></span> 倉管<br>追蹤歸還</div></foreignObject>
 <line x1="234" y1="469" x2="313" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
@@ -1070,20 +1070,20 @@
 <path d="M755,583 L900,583 L900,500" class="flow-line" marker-end="url(#arrow)"></path>
 <line x1="1020" y1="469" x2="1070" y2="469" class="flow-line" marker-end="url(#arrow)"></line>
 <path d="M370,512 L370,526 L14,526 L14,360 L780,360 L780,342" class="exc-line" marker-end="url(#arrow)"></path>
-<foreignObject x="40" y="530" width="320" height="16"><div class="svg-edit left warn-curve" style="font-size:11px">否｜水位不足→併入硬體 PM 備貨判斷</div></foreignObject>
+<foreignObject x="40" y="530" width="420" height="16"><div class="svg-edit left warn-curve" style="font-size:11px">否｜水位不足→併入硬體 PM 備貨判斷（要備貨時申請停留，入庫後接續）</div></foreignObject>
 <rect x="1070" y="438" width="190" height="62" rx="10" class="node node-end"></rect>
 <foreignObject x="1073" y="441" width="184" height="56"><div class="svg-edit on-end" style="font-size:11px"><span class="rdot rdot-int"></span> 結束（整合交付處驗收）<br>通知硬體 PM 已歸還</div></foreignObject>
 
 <rect x="10" y="650" width="1340" height="320" rx="16" class="lane lane-neutral"></rect>
-<foreignObject x="32" y="660" width="520" height="20"><div class="svg-edit left lane-neutral-text" style="font-size:12.5px">資產租用｜無客戶．借資產（設備租用單）</div></foreignObject>
+<foreignObject x="32" y="660" width="520" height="20"><div class="svg-edit left lane-neutral-text" style="font-size:12.5px">資產租用｜無客戶．租用資產</div></foreignObject>
 <rect x="34" y="686" width="200" height="62" rx="10" class="node node-input"></rect>
 <foreignObject x="37" y="689" width="194" height="56"><div class="svg-edit" style="font-size:12.5px;font-weight:600"><span class="rdot rdot-neutral"></span> 需求人員（保管人）<br>提出「資產租用」申請</div></foreignObject>
 <polygon points="370,667 432,717 370,767 308,717" class="node node-decision"></polygon>
-<foreignObject x="338" y="697" width="64" height="40"><div class="svg-edit diamond" style="font-size:11.5px"><span class="rdot rdot-ga"></span> 總務評估是有閒置資產<br>符合規格？</div></foreignObject>
+<foreignObject x="322" y="695" width="96" height="44"><div class="svg-edit diamond" style="font-size:10.5px"><span class="rdot rdot-ga"></span> 總務評估是否有<br>閒置資產符合規格？</div></foreignObject>
 <polygon points="560,670 614,717 560,764 506,717" class="node node-decision"></polygon>
 <foreignObject x="533" y="699" width="54" height="36"><div class="svg-edit diamond" style="font-size:11.5px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估庫存是否<br>足夠？</div></foreignObject>
 <polygon points="770,659 842,717 770,775 698,717" class="node node-decision"></polygon>
-<foreignObject x="725" y="697" width="90" height="40"><div class="svg-edit diamond" style="font-size:9px"><span class="rdot rdot-hwpm"></span> 硬體 PM 評估庫存是否轉資產<br>（須經總經理決策）</div></foreignObject>
+<foreignObject x="725" y="697" width="90" height="40"><div class="svg-edit diamond" style="font-size:10.5px"><span class="rdot rdot-hwpm"></span> 庫存轉資產<br>總經理核准？</div></foreignObject>
 <rect x="900" y="686" width="130" height="62" rx="10" class="node node-plain"></rect>
 <foreignObject x="903" y="689" width="124" height="56"><div class="svg-edit" style="font-size:13px;font-weight:600"><span class="rdot rdot-hwpm"></span> 庫存轉資產</div></foreignObject>
 <rect x="1060" y="686" width="140" height="62" rx="10" class="node node-terminal"></rect>
@@ -1097,12 +1097,14 @@
 <foreignObject x="459" y="698" width="24" height="18"><div class="svg-edit no" style="font-size:11px">否</div></foreignObject>
 <line x1="614" y1="717" x2="698" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
 <foreignObject x="646" y="698" width="24" height="18"><div class="svg-edit yes" style="font-size:11px">是</div></foreignObject>
-<path d="M560,764 L560,812 L24,812 L24,355 L780,355 L780,342" class="exc-line" marker-end="url(#arrow)"></path>
-<foreignObject x="570" y="790" width="180" height="18"><div class="svg-edit left warn-curve" style="font-size:11px">否｜無庫存可轉→併入硬體 PM 備貨判斷</div></foreignObject>
+<path d="M560,764 L560,885 L640,885" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="568" y="790" width="120" height="18"><div class="svg-edit left no" style="font-size:11px">否｜庫存不足</div></foreignObject>
 <line x1="842" y1="717" x2="900" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
 <foreignObject x="853" y="698" width="40" height="18"><div class="svg-edit yes" style="font-size:11px">核准</div></foreignObject>
-<path d="M770,775 L770,821 L18,821 L18,350 L780,350 L780,342" class="exc-line" marker-end="url(#arrow)"></path>
-<foreignObject x="760" y="790" width="190" height="18"><div class="svg-edit left warn-curve" style="font-size:11px">不核准→併入硬體 PM 備貨判斷</div></foreignObject>
+<path d="M770,775 L770,858" class="flow-line" marker-end="url(#arrow)"></path>
+<foreignObject x="778" y="800" width="120" height="18"><div class="svg-edit left no" style="font-size:11px">不核准</div></foreignObject>
+<rect x="640" y="860" width="280" height="50" rx="10" class="node node-terminal"></rect>
+<foreignObject x="643" y="863" width="274" height="44"><div class="svg-edit terminal" style="font-size:11.5px">改走資產請購<br>（不在本 SOP 範圍）</div></foreignObject>
 <line x1="1030" y1="717" x2="1060" y2="717" class="flow-line" marker-end="url(#arrow)"></line>
 
       </svg>
@@ -1141,7 +1143,7 @@
 <tr>
   <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">2</span>請購</td>
   <td class="role-cell">主責：<span style="color:var(--role-hwpm)">硬體PM</span>／<span style="color:var(--amber)">專案PM</span></td>
-  <td>庫存不足時（開案分流或出貨需求評估時，含無庫存）一律由硬體 PM 詢問 Ben 是否要備貨：要備貨則硬體 PM 回到庫存主案下請購（備貨入庫後，專案以出貨申請單領貨）；不備貨則由專案 PM 於銷售主案下直接開立請購（直接交付專案，不走出貨申請單）；借用／租用申請遇不備貨時，回歸需求單位，後續由需求單位自行請購。</td>
+  <td>庫存不足時（開案分流或出貨需求評估時，含無庫存）一律由硬體 PM 詢問 Ben 是否要備貨：要備貨則硬體 PM 回到庫存主案下請購（備貨入庫後，專案以出貨申請單領貨）；不備貨則由專案 PM 於銷售主案下直接開立請購（直接交付專案，不走出貨申請單）；庫存借用申請遇不備貨時，回歸需求單位，後續由需求單位自行請購；遇要備貨時，原申請停留於該關卡，貨入庫後接續，無須重新申請。</td>
   <td class="form-cell">採購系統（ERP) - 請購單</td>
   <td class="fields-cell"><div class="field-line"><b>觸發原因</b><span>需求觸發（備貨庫存／專案需求）</span></div><div class="field-line"><b>目前可用庫存</b><span>判斷當下的庫存數量</span></div><div class="field-line"><b>補貨判斷</b><span>硬體 PM 詢問 Ben 是否要備貨，據以決定請購路徑</span></div><div class="field-line"><b>本次請購數量</b><span>依缺口估算之採購量</span></div></td>
   <td class="output-cell">常態：出貨需求觸發評估 → 視需要開立請購 → 進入採購</td>
@@ -1157,7 +1159,7 @@
 <tr>
   <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">4</span>到貨</td>
   <td class="role-cell" style="color:var(--warn)">主責：總務</td>
-  <td>到公司倉之採購件，收件人一律為總務；總務代收後通知請購人員進行驗收，本身不涉規格判斷。</td>
+  <td>到公司倉之採購件，收件人一律為總務；總務代收後通知請購人員進行驗收，本身不涉規格判斷。客戶倉（供應商直送客戶端）由業務通知請購人驗收；廠商倉由請購人自行掌握到貨。</td>
   <td class="form-cell">總務收發文件</td>
   <td class="fields-cell"><div class="field-line"><b>對應採購單號</b><span>連結來源採購單，確保可追溯</span></div><div class="field-line"><b>實際到貨日期</b><span>總務簽收當日</span></div><div class="field-line"><b>收件人</b><span>公司倉到貨一律由總務代收</span></div><div class="field-line"><b>通知對象</b><span>通知請購人員進行驗收</span></div></td>
   <td class="output-cell">總務完成收貨簽收 → 通知請購人進行驗收</td>
@@ -1173,7 +1175,7 @@
 <tr>
   <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">6</span>入庫</td>
   <td class="role-cell" style="color:var(--role-wh)">主責：倉庫管理者</td>
-  <td>倉管收到驗收單通知後，建立入庫單。客戶倉、廠商倉同樣經請購人驗收後，依倉別建立入庫單（帳上入庫），僅不進公司實體倉。</td>
+  <td>倉管收到驗收單通知後，建立入庫單。客戶倉、廠商倉同樣經請購人驗收後，依倉別建立入庫單（帳上入庫），僅不進公司實體倉；不備貨、直接交付專案者亦須建立入庫單（驗收程序內含此關卡）。</td>
   <td class="form-cell">庫存管理系統 - 入庫單</td>
   <td class="fields-cell"><div class="field-line"><b>對應採購單、驗收單</b><span>連結來源 ERP 採購單、系統驗收單、客戶驗收單</span><span><br></span><span><br></span><span><br></span></div><div class="field-line"><b>品項規格</b><span>入庫品項規格</span></div><div class="field-line"><b>序號</b><span>入庫單填寫硬體原廠序號</span></div><div class="field-line"><b>倉別</b><span>公司倉、客戶倉、廠商倉</span></div><div class="field-line"><b>入庫日期</b><span>依驗收日期入作為入庫日期</span></div><div class="field-line"><b>可用庫存數量</b><span>更新後之正式庫存數字</span></div></td>
   <td class="output-cell">庫存更新完成，品項成為可用庫存→ 等待出庫申請（借用或出貨）<br>庫存同步更新</td>
@@ -1192,12 +1194,12 @@
   <td>供同仁申請借用存貨作測試或安裝，申請人即為保管人；須經原備貨之硬體 PM 核准，倉管才會出庫。</td>
   <td class="form-cell">GF 表單 - 庫存借用申請單<br><a class="form-link" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/1oQwGG0Uqkqzel9gtyB1qXmi_AbR-x2jbjbi0VkYCDfg/viewform">開啟表單 ↗</a></td>
   <td class="fields-cell"><div class="field-line"><b>Email／申請人</b><span>聯絡窗口與保管人</span></div><div class="field-line"><b>領取人姓名</b><span>實際領取者</span></div><div class="field-line"><b>申請人所屬單位</b><span>責任歸屬單位</span></div><div class="field-line"><b>借用品項名稱／數量</b><span>含CPU／GPU／RAM／SSD規格</span></div><div class="field-line"><b>借用用途</b><span>功能測試／安裝作業等</span></div><div class="field-line"><b>預計借用／歸還日期</b><span><br></span></div></td>
-  <td class="output-cell">需經原備貨硬體 PM 核准才能領貨；如屬安裝測試用途，得經軟硬整合交付處進行軟硬整合安裝</td>
+  <td class="output-cell">需經原備貨硬體 PM 核准才能領貨；倉管建立調撥單，貨物管理狀態移至專案倉；如屬安裝測試用途，得經軟硬整合交付處進行軟硬整合安裝</td>
 </tr>
 <tr>
   <td class="stage-cell"><span class="stage-chip" style="background:var(--ink)">8</span>出庫</td>
   <td class="role-cell" style="color:var(--role-wh)">主責：倉庫管理者</td>
-  <td>依已有客戶簽回驗收單之出貨申請單實際同步扣減庫存帳，責任正式移轉。</td>
+  <td>依已有客戶簽回驗收單之出貨申請單實際同步扣減庫存帳，責任正式移轉。庫存借用不開出庫單，改以調撥單移至專案倉。</td>
   <td class="form-cell">庫存管理系統 - 出庫單</td>
   <td class="fields-cell"><div class="field-line"><b>對應申請單號</b><span>填入已核准之出貨申請單</span></div><div class="field-line"><b>實際出庫品項與序號</b><span>撿貨當下確認之實際品項</span></div><div class="field-line"><b>出庫日期</b><span>責任移轉生效日</span></div><div class="field-line"><b>客戶驗收單</b><span>責任正式移轉之憑證</span></div></td>
   <td class="output-cell">庫存同步更新</td>
